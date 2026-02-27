@@ -10,6 +10,8 @@ const RegisterPage = () => {
         console.log('Success:', values);
         const { name, email, password } = values;
         const res = await createrUserApi(name, email, password);
+                console.log('res:', res);
+
         if (res) {
             notification.success({
                 message: 'Đăng ký thành công',

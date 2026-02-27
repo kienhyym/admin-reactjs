@@ -1,13 +1,23 @@
 import axios from "./axios.custiomzie";
 
-const createrUserApi = async (name, email, password) => {
+const createrUserApi =  (name, email, password) => {
 const URL_API = `/v1/api/register`;
 const data = {
     name,
     email,
     password
 }
-return await axios.post(URL_API, data);
+return  axios.post(URL_API, data);
 }
 
-export { createrUserApi }
+
+const loginApi =  ( email, password) => {
+const URL_API = `/v1/api/login`;
+const data = {
+    email,
+    password
+}
+return  axios.post(URL_API, data);
+}
+
+export { createrUserApi ,loginApi}

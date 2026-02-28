@@ -7,6 +7,7 @@ import RegisterPage from './pages/register.jsx'
 import UserPage from './pages/user.jsx'
 import HomePage from './pages/home.jsx'
 import LoginPage from './pages/login.jsx'
+import { AuthWrapper } from './component/context/authContext.jsx'
 
 
 const router = createBrowserRouter([
@@ -29,7 +30,7 @@ const router = createBrowserRouter([
     path: 'register',
     element: <RegisterPage />
   },
-{
+  {
     path: 'login',
     element: <LoginPage />
   },
@@ -39,6 +40,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <AuthWrapper>
+      <RouterProvider router={router} />
+    </AuthWrapper>
   </React.StrictMode>,
 )

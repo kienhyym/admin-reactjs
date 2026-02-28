@@ -1,15 +1,17 @@
-import React from 'react';
-import { Button,  Form, Input, notification } from 'antd';
+import React, { useContext } from 'react';
+import { Button, Form, Input, notification } from 'antd';
 import { loginApi } from '../util/api';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../component/context/authContext';
 
 
 const LoginPage = () => {
     const navigate = useNavigate();
+    const { setAtuh } = useContext(AuthContext)
     const onFinish = async (values) => {
         const { email, password } = values;
         const res = await loginApi(email, password);
-                console.log('res:', res);
+        console.log('res:', res);
 
         if (res && res.EC === 0) {
             localStorage.setItem("token", res.access_token);
@@ -17,6 +19,13 @@ const LoginPage = () => {
                 message: 'Đăng nhập thành công',
                 description: 'Bạn đã đăng nhập thành công tài khoản',
             });
+            setAtuh({
+                isAuthenticated: true,
+                user: {
+                    name: res?.user?.name,
+                    email: res?.user?.email1
+                },
+            })
             navigate('/');
         } else {
             notification.error({
@@ -47,6 +56,7 @@ const LoginPage = () => {
             <Form.Item
                 label="email"
                 name="email"
+                values='kienhyym@gmail.com'
                 rules={[
                     {
                         required: true,
@@ -59,10 +69,12 @@ const LoginPage = () => {
             <Form.Item
                 label="Password"
                 name="password"
+                defaultValue="123"
                 rules={[
                     {
                         required: true,
                         message: 'Please input your password!',
+
                     },
                 ]}
             >

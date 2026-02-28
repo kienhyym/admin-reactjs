@@ -17,8 +17,9 @@ export const AuthWrapper = (props) => {
             email: ""
         },
     });
+    const [loading, setLoading] = useState(true);
 
-    return (<AuthContext.Provider value={{ auth, setAtuh }}>
+    return (<AuthContext.Provider value={{ auth, setAtuh, loading, setLoading }}>
         {props.children}
     </AuthContext.Provider>
     )

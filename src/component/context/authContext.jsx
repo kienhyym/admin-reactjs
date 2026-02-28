@@ -6,6 +6,7 @@ export const AuthContext = createContext({
         email: "",
 
     },
+    loading: true,
 
 });
 
@@ -16,6 +17,7 @@ export const AuthWrapper = (props) => {
             name: "",
             email: ""
         },
+         loading: true,
     });
     const [loading, setLoading] = useState(true);
 

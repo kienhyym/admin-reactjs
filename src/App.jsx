@@ -12,7 +12,7 @@ function App() {
     const festAccount = async () => {
       const res = await axios.get(`/v1/api/account`)
       console.log('res:', res);
-      if (res) {
+      if (res && res.message) {
         setAtuh({
           isAuthenticated: true,
           user: {

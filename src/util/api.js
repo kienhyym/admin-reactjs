@@ -20,4 +20,10 @@ const data = {
 return  axios.post(URL_API, data);
 }
 
-export { createrUserApi ,loginApi}
+const getUsersApi =  () => {
+const URL_API = `/v1/api/user`;
+
+return  axios.get(URL_API);
+}
+
+export { createrUserApi ,loginApi, getUsersApi}

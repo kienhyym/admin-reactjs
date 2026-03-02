@@ -1,64 +1,48 @@
 import React, { useState } from 'react';
-import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
+import {
+    PlayCircleOutlined,
+    QuestionCircleOutlined,
+    BookOutlined,
+    AppstoreOutlined
+} from '@ant-design/icons';
 import { Menu } from 'antd';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContext } from '../context/authContext';
+import "./header.css"
 
 const Header = () => {
     const navifate = useNavigate();
-    const { auth,setAtuh } = useContext(AuthContext)
-    const [current, setCurrent] = useState('mail');
+    const { auth, setAtuh } = useContext(AuthContext)
+    const location = useLocation();
 
     console.log('auth:', auth)
     const items = [
         {
-            label: <Link to="/">home page</Link>,
-            key: 'home',
-            icon: <MailOutlined />,
+            label: <Link to="/lessons">Video bài giảng</Link>,
+            key: 'lessons',
+            icon: <PlayCircleOutlined />,
         },
-        ...(auth?.isAuthenticated ? [{
-            label: <Link to="/user">user page</Link>,
-            key: 'user',
-            icon: <MailOutlined />,
-        }] : []),
-
         {
-            label: `xin chao ${auth?.user?.name || "chua dang nhap"}`,
-            key: 'SubMenu',
-            icon: <SettingOutlined />,
-            children: [
-
-                ...(!auth?.isAuthenticated ? [{
-                    label: <Link to="/login">login </Link>,
-                    key: 'login',
-                }] : [{
-                    label: <span onClick={() => {
-                        console.log('logout');
-                        setAtuh({
-                            isAuthenticated: false,
-                            user: {
-                                name: '',
-                                email: ''
-                            },
-                        })
-                        localStorage.clear("token");
-                        
-                        setCurrent("home");
-                        navifate("/")
-                    }}>logout</span>,
-                    key: 'logout',
-                }]),
-
-
-
-            ],
+            label: <Link to="/quiz">Câu hỏi ôn tập</Link>,
+            key: 'quiz',
+            icon: <QuestionCircleOutlined />,
+        },
+        {
+            label: <Link to="/knowledge">Tổng hợp kiến thức</Link>,
+            key: 'knowledge',
+            icon: <BookOutlined />,
+        },
+        {
+            label: <Link to="/extend">Mở rộng</Link>,
+            key: 'extend',
+            icon: <AppstoreOutlined />,
         },
     ];
-    const onClick = (e) => {
-        console.log('click ', e);
-        setCurrent(e.key);
-    };
-    return <Menu onClick={onClick} selectedKeys={[current]} mode="horizontal" items={items} />;
+
+    return <Menu
+        className="header-menu"
+        selectedKeys={[location.pathname]}
+        mode="horizontal" items={items} />;
 };
 export default Header;

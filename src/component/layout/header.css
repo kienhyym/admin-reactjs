@@ -1,0 +1,60 @@
+/* Header container */
+.header-menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(90deg, #0f2027, #203a43, #2c5364);
+  border-bottom: none;
+  padding: 0 40px;
+  height: 64px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Menu item */
+.header-menu .ant-menu-item {
+  color: #ffffff !important;
+  font-weight: 500;
+  font-size: 15px;
+  margin: 0 10px;
+  padding: 0 20px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+/* Hover effect */
+.header-menu .ant-menu-item:hover {
+  background: rgba(255, 255, 255, 0.15) !important;
+  color: #ffffff !important;
+  transform: translateY(-2px);
+}
+
+/* Active item */
+.header-menu .ant-menu-item-selected {
+  background: #1890ff !important;
+  color: #ffffff !important;
+  font-weight: 600;
+  box-shadow: 0 4px 10px rgba(24, 144, 255, 0.4);
+}
+
+/* Remove default bottom border */
+.header-menu.ant-menu-horizontal {
+  border-bottom: none;
+}
+
+/* Icon spacing */
+.header-menu .ant-menu-item .anticon {
+  margin-right: 8px;
+  font-size: 16px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .header-menu {
+    padding: 0 10px;
+  }
+
+  .header-menu .ant-menu-item {
+    font-size: 13px;
+    padding: 0 10px;
+  }
+}

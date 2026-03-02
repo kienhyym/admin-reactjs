@@ -10,7 +10,7 @@ const HomePage = () => {
 
       {/* HERO SECTION */}
       <div className="hero-section">
-        <img src="src/assets/chemistry.jpg" alt="Chemistry Banner" className="hero-image" />
+        <img src="../public/image/chemistry.jpg" alt="Chemistry Banner" className="hero-image" />
 
         <div className="hero-overlay">
           <h1>HỌC HÓA THCS</h1>

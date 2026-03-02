@@ -8,7 +8,7 @@ const lessons = [
     {
         id: 1,
         title: "BÀI 2: PHẢN ỨNG HOÁ HỌC",
-        thumbnail: "../assets/bai2.jpg",
+        thumbnail: "../public/image/bai2.jpg",
         videoUrl: [{
             title: "",
             url: bai2Video
@@ -18,7 +18,7 @@ const lessons = [
     {
         id: 2,
         title: "BÀI 3: MOL VÀ TỈ KHỐI CHẤT KHÍ",
-        thumbnail: "../assets/bai3.jpg",
+        thumbnail: "../public/image/bai3.jpg",
         videoUrl: [
             {
                 title: "PHẦN 1",
@@ -35,7 +35,7 @@ const lessons = [
     {
         id: 3,
         title: "BÀI 4: DUNG DỊCH VÀ NỒNG ĐỘ",
-        thumbnail: "../assets/bai4.jpg",
+        thumbnail: "../public/image/bai4.jpg",
         videoUrl: [
 
 

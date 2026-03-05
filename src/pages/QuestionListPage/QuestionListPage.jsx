@@ -8,7 +8,7 @@ const QuestionListPage = () => {
 
   return (
     <div className="question-container">
-      <h1>🧪 Câu hỏi ôn tập theo bài</h1>
+      <h1 className="page-title">🧪 Câu hỏi ôn tập theo bài</h1>
 
       <div className="question-grid">
         {lessons.map((lesson) => (

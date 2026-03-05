@@ -1,15 +1,29 @@
 .lesson-card {
-  background: #fff;
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  background: white;
+
+  border-radius: 18px;
+
+  padding: 18px;
+
+  box-shadow:
+    0 10px 25px rgba(0, 0, 0, 0.08);
+
   transition: all 0.3s ease;
 }
 
 .lesson-card:hover {
+
   transform: translateY(-8px);
-  box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+
+  box-shadow:
+    0 18px 40px rgba(0, 0, 0, 0.15);
+
 }
+
+/* .lesson-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+} */
 
 .thumbnail img {
   width: 100%;
@@ -29,14 +43,22 @@
 }
 
 .learn-btn {
-  padding: 10px 20px;
-  background: linear-gradient(135deg, #667eea, #764ba2);
+  background: linear-gradient(135deg,
+      #2EC4C7,
+      #3A86FF);
+
+  color: white;
+
   border: none;
-  border-radius: 25px;
-  color: #fff;
-  font-weight: 500;
-  cursor: pointer;
-  transition: 0.3s;
+
+  padding: 10px 22px;
+
+  border-radius: 12px;
+
+  font-weight: 600;
+
+  transition: 0.25s;
+  margin-top: 10px;
 }
 
 .learn-btn:hover {

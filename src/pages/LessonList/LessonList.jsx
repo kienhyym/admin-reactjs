@@ -7,7 +7,7 @@ import lessons from "../../data/LessonListdata";
 const LessonList = () => {
   return (
     <div className="lesson-container">
-      <h1>📚 Danh sách bài giảng</h1>
+      <h1 className="page-title">📚 Danh sách bài giảng</h1>
 
       <div className="lesson-grid">
         {lessons.map((lesson) => (

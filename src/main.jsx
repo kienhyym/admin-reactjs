@@ -12,6 +12,7 @@ import QuizPage from './pages/QuizPage/QuizPage.jsx'
 import QuestionListPage from './pages/QuestionListPage/QuestionListPage.jsx'
 import LessonList from './pages/LessonList/LessonList.jsx'
 import LessonDetail from './pages/LessonDetail/LessonDetail.jsx'
+import QuizCoverPage from './pages/QuizCoverPage/QuizCoverPage.jsx'
 
 
 const router = createBrowserRouter([
@@ -44,6 +45,10 @@ const router = createBrowserRouter([
         element: <LessonDetail />
       },
     ]
+  },
+  {
+    path: "quizcover",
+    element: <QuizCoverPage />
   },
   {
     path: 'register',

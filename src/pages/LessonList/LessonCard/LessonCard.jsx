@@ -6,15 +6,16 @@ const LessonCard = ({ lesson }) => {
   return (
     <Link
       to={`/lessons/${lesson.id}`}
-      style={{ textDecoration: "none", color: "inherit" }}
+      style={{ textDecoration: "none", color: "inherit" ,backgroundColor:"white", borderRadius: 12,padding: 12,boxShadow: "0 4px 12px rgba(0,0,0,0.1)",}}
     >
       <div
         style={{
-          width: 280,
+          width: "100%",
           borderRadius: 12,
-          boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
+          
           overflow: "hidden",
           cursor: "pointer",
+          
         }}
       >
         <img
@@ -23,17 +24,10 @@ const LessonCard = ({ lesson }) => {
           style={{ width: "100%", height: 160, objectFit: "cover" }}
         />
 
-        <div style={{ padding: 16 }}>
+        <div style={{ padding: 16 ,textAlign: "center",}}>
           <h3>{lesson.title}</h3>
           <button
-            style={{
-              padding: "8px 16px",
-              borderRadius: 20,
-              border: "none",
-              background: "#667eea",
-              color: "#fff",
-              cursor: "pointer",
-            }}
+            className="learn-btn "
           >
             Vào học
           </button>

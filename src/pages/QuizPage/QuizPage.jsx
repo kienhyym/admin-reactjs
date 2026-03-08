@@ -125,49 +125,100 @@ const quizData = [
 
   {
     type: "boolean",
-    question: "Trong quá trình sản xuất vôi chỉ xảy ra sự biến đổi hoá học.",
+    question: `Quá trình sản xuất vôi sống (CaO) từ đá vôi (thành phần chính là CaCO3) gồm hai công đoạn:
+
+- Công đoạn 1: nghiền đá vôi thành nhiều viên nhỏ.
+
+- Công đoạn 2: các viên đá vôi nhỏ được cho vào lò nung nóng để thu được vôi sống và giải phóng khí CO2.
+
+Hãy chọn Đúng/Sai cho mệnh đề:
+
+"Phương trình của phản ứng hoá học xảy ra là: Đá vôi → Vôi sống + Khí carbon dioxide."`,
     correct: false,
-      options: ["Đúng", "Sai"],
+    options: ["Đúng", "Sai"],
 
   },
 
   {
     type: "boolean",
-    question: "Một trong các dấu hiệu nhận biết có phản ứng hoá học xảy ra là có khí CO2.",
+    question: `Quá trình sản xuất vôi sống (CaO) từ đá vôi (thành phần chính là CaCO3) gồm hai công đoạn:
+
+- Công đoạn 1: nghiền đá vôi thành nhiều viên nhỏ.
+
+- Công đoạn 2: các viên đá vôi nhỏ được cho vào lò nung nóng để thu được vôi sống và giải phóng khí CO2.
+
+Hãy chọn Đúng/Sai cho mệnh đề:
+
+“Trong quá trình sản xuất vôi chỉ xảy ra sự biến đổi hoá học.”`,
     correct: true,
-      options: ["Đúng", "Sai"],
+    options: ["Đúng", "Sai"],
 
   },
 
   {
     type: "boolean",
-    question: "Quá trình xảy ra ở công đoạn 2 là sự biến đổi vật lí.",
-    correct: false,
-      options: ["Đúng", "Sai"],
+    question: `Quá trình sản xuất vôi sống (CaO) từ đá vôi (thành phần chính là CaCO3) gồm hai công đoạn:
 
-  },
+- Công đoạn 1: nghiền đá vôi thành nhiều viên nhỏ.
 
-  {
-    type: "boolean",
-    question: "Cây nến thứ nhất không tan trong nước.",
-    correct: true,  
-      options: ["Đúng", "Sai"],
+- Công đoạn 2: các viên đá vôi nhỏ được cho vào lò nung nóng để thu được vôi sống và giải phóng khí CO2.
 
-  },
+Hãy chọn Đúng/Sai cho mệnh đề:
 
-  {
-    type: "boolean",
-    question: "Quá trình xảy ra ở cây nến thứ hai là hiện tượng hoá học.",
-    correct: false,
-      options: ["Đúng", "Sai"],
-
-  },
-
-  {
-    type: "boolean",
-    question: "Ở cây nến thứ ba xảy ra cả hai hiện tượng vật lí và hoá học.",
+“Một trong các dấu hiệu nhận biết có phản ứng hoá học xảy ra là có khí CO2.”`,
     correct: true,
-      options: ["Đúng", "Sai"],
+    options: ["Đúng", "Sai"],
+
+  },
+
+  {
+    type: "boolean",
+    question:`Quá trình sản xuất vôi sống (CaO) từ đá vôi (thành phần chính là CaCO3) gồm hai công đoạn:
+
+- Công đoạn 1: nghiền đá vôi thành nhiều viên nhỏ.
+
+- Công đoạn 2: các viên đá vôi nhỏ được cho vào lò nung nóng để thu được vôi sống và giải phóng khí CO2.
+
+Hãy chọn Đúng/Sai cho mệnh đề:
+
+“Quá trình xảy ra ở công đoạn 2 là sự biến đổi vật lí.”`,
+    correct: false,
+    options: ["Đúng", "Sai"],
+
+  },
+  {
+    type: "boolean",
+    question: `Chuẩn bị 3 cây nến nhỏ: cây nến thứ nhất cho vào nước, cây nến thứ hai cho vào một cốc thuỷ tinh, đặt trong một nồi chứa nước và đun trên bếp đến khi nước sôi và cây thứ ba mang đốt.
+
+Hãy chọn Đúng/Sai cho mệnh đề:
+
+“Cây nến thứ nhất không tan trong nước.”`,
+    correct: false,
+    options: ["Đúng", "Sai"],
+
+  },
+
+  {
+    type: "boolean",
+    question: `Chuẩn bị 3 cây nến nhỏ: cây nến thứ nhất cho vào nước, cây nến thứ hai cho vào một cốc thuỷ tinh, đặt trong một nồi chứa nước và đun trên bếp đến khi nước sôi và cây thứ ba mang đốt.
+
+Hãy chọn Đúng/Sai cho mệnh đề:
+
+“Ở cây nến thứ ba xảy ra cả hai hiện tượng vật lí và hoá học.”`,
+    correct: true,
+    options: ["Đúng", "Sai"],
+
+  },
+
+  {
+    type: "boolean",
+    question: `Chuẩn bị 3 cây nến nhỏ: cây nến thứ nhất cho vào nước, cây nến thứ hai cho vào một cốc thuỷ tinh, đặt trong một nồi chứa nước và đun trên bếp đến khi nước sôi và cây thứ ba mang đốt.
+
+Hãy chọn Đúng/Sai cho mệnh đề:
+
+“Nến thứ ba sau khi đốt vẫn giữ nguyên kích thước ban đầu.”`,
+    correct: false,
+    options: ["Đúng", "Sai"],
 
   },
 
@@ -175,7 +226,7 @@ const quizData = [
     type: "boolean",
     question: "Nến thứ ba sau khi đốt vẫn giữ nguyên kích thước ban đầu.",
     correct: false,
-      options: ["Đúng", "Sai"],
+    options: ["Đúng", "Sai"],
 
   },
 

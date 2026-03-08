@@ -1,35 +1,19 @@
-.lesson-container {
-  padding: 40px;
-  min-height: 100vh;
-  
+.lesson-page {
+  padding: 20px;
 }
 
-.lesson-container h1 {
-  text-align: center;
-  margin-bottom: 40px;
-  color: #333;
+.lesson-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
-.lesson-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 30px;
+.lesson-actions {
+  display: flex;
+  gap: 10px;
 }
 
-.page-title{
-
-font-size: 36px;
-font-weight: 700;
-
-background: linear-gradient(
-90deg,
-#2EC4C7,
-#3A86FF
-);
-
--webkit-background-clip: text;
--webkit-text-fill-color: transparent;
-
-margin-bottom: 40px;
-
+.lesson-header h2 {
+  font-weight: 600;
 }

@@ -6,7 +6,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import RegisterPage from './pages/register.jsx'
 import UserPage from './pages/user.jsx'
 import HomePage from './pages/Home/HomePage.jsx'
-import LoginPage from './pages/login.jsx'
+import LoginPage from './pages/Login/LoginPage.jsx'
 import { AuthWrapper } from './component/context/authContext.jsx'
 import QuizPage from './pages/QuizPage/QuizPage.jsx'
 import QuestionListPage from './pages/QuestionListPage/QuestionListPage.jsx'
@@ -14,6 +14,7 @@ import LessonList from './pages/LessonList/LessonList.jsx'
 import LessonDetail from './pages/LessonDetail/LessonDetail.jsx'
 import KnowledgePage from './pages/Knowledge/KnowledgePage.jsx'
 import ExtendPage from './pages/ExtendPage/ExtendPage.jsx'
+import WelcomePage from './pages/WelcomePage/WelcomePage.jsx'
 
 
 const router = createBrowserRouter([
@@ -65,6 +66,10 @@ const router = createBrowserRouter([
   {
     path: 'login',
     element: <LoginPage />
+  },
+  {
+    path: 'welcome',
+    element: <WelcomePage />
   },
 ]);
 

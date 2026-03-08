@@ -1,51 +1,69 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useContext } from "react";
+import { Card, Row, Col } from "antd";
+import {
+  UserOutlined,
+  ShoppingCartOutlined,
+  FileTextOutlined,
+  DollarOutlined
+} from "@ant-design/icons";
+import { AuthContext } from "../../component/context/authContext";
 import "./HomePage.css";
 
 const HomePage = () => {
-  const navigate = useNavigate();
+
+  const { auth } = useContext(AuthContext);
 
   return (
-    <div className="home-container">
+    <div className="dashboard-container">
 
-      {/* HERO SECTION */}
-      <div className="hero-section">
-        <img src="/image/chemistry.jpg" alt="Chemistry Banner" className="hero-image" />
-
-        <div className="hero-overlay">
-          <h1>HỌC HÓA THCS</h1>
-          <p>Khám phá thế giới điều kỳ qua thí nghiệm & bài giảng sinh động</p>
-
-          <div className="hero-buttons">
-            <button onClick={() => navigate("/lessons")}>
-              📚 Vào học ngay
-            </button>
-
-            <button className="secondary" onClick={() => navigate("/quiz")}>
-              🧪 Làm Quiz
-            </button>
-          </div>
-        </div>
+      <div className="dashboard-header">
+        <h1>Xin chào {auth?.user?.name || "Admin"} 👋</h1>
+        <p>Chào mừng bạn quay lại hệ thống quản trị</p>
       </div>
 
-      {/* GIỚI THIỆU */}
-      <section className="about-section">
-        <h2>Tại sao nên học cùng chúng tôi?</h2>
+      {/* <Row gutter={20}>
 
-        <div className="features">
-          <div className="feature-card">
-            🎥 Video bài giảng sinh động
-          </div>
+        <Col span={6}>
+          <Card className="stat-card">
+            <UserOutlined className="stat-icon blue" />
+            <div>
+              <h2>120</h2>
+              <p>Người dùng</p>
+            </div>
+          </Card>
+        </Col>
 
-          <div className="feature-card">
-            🧪 Thí nghiệm trực quan
-          </div>
+        <Col span={6}>
+          <Card className="stat-card">
+            <ShoppingCartOutlined className="stat-icon green" />
+            <div>
+              <h2>58</h2>
+              <p>Sản phẩm</p>
+            </div>
+          </Card>
+        </Col>
 
-          <div className="feature-card">
-            🎯 Câu hỏi ôn tập thông minh
-          </div>
-        </div>
-      </section>
+        <Col span={6}>
+          <Card className="stat-card">
+            <FileTextOutlined className="stat-icon orange" />
+            <div>
+              <h2>32</h2>
+              <p>Đơn hàng</p>
+            </div>
+          </Card>
+        </Col>
+
+        <Col span={6}>
+          <Card className="stat-card">
+            <DollarOutlined className="stat-icon red" />
+            <div>
+              <h2>$12,500</h2>
+              <p>Doanh thu</p>
+            </div>
+          </Card>
+        </Col>
+
+      </Row> */}
 
     </div>
   );

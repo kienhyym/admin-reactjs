@@ -1,73 +1,53 @@
-/* Header container */
-.header-menu {
+/* Sidebar */
+.sidebar {
+  width: 220px;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  background: linear-gradient(180deg, #2EC4C7, #3A86FF);
+}
+
+/* Logo */
+.logo {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(90deg,
-      #2EC4C7,
-      #3A86FF);
-  border-bottom: none;
-  padding: 0 40px;
-  height: 64px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-
-/* Menu item */
-.header-menu .ant-menu-item {
-  color: #ffffff !important;
-  font-weight: 500;
-  font-size: 15px;
-  margin: 0 10px;
-  padding: 0 20px;
-  border-radius: 8px;
-  transition: all 0.3s ease;
-}
-
-/* Hover effect */
-.header-menu .ant-menu-item:hover {
-  background: rgba(255, 255, 255, 0.15) !important;
-  color: #ffffff !important;
-  transform: translateY(-2px);
-}
-
-/* Active item */
-.header-menu .ant-menu-item-selected {
-  background: #1890ff !important;
-  color: #ffffff !important;
-  font-weight: 600;
-  box-shadow: 0 4px 10px rgba(24, 144, 255, 0.4);
-}
-
-/* Remove default bottom border */
-.header-menu.ant-menu-horizontal {
-  border-bottom: none;
-}
-
-/* Icon spacing */
-.header-menu .ant-menu-item .anticon {
-  margin-right: 8px;
-  font-size: 16px;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .header-menu {
-    padding: 0 10px;
-  }
-
-  .header-menu .ant-menu-item {
-    font-size: 13px;
-    padding: 0 10px;
-  }
+  padding: 20px 0;
 }
 
 .menu-logo {
-  height: 54px;
+  height: 80px;
   object-fit: contain;
-  padding: 5px;
 }
-.logo{
-  height: 64px;
-  width: 64px;
-  /* background-color: blueviolet; */
+
+/* Menu */
+.sidebar-menu {
+  flex: 1;
+  background: transparent;
+  border-right: none;
+}
+
+/* Logout button */
+.logout-container {
+  padding: 20px;
+}
+
+/* Menu item */
+.sidebar-menu .ant-menu-item {
+  color: white !important;
+  margin: 6px 10px;
+  border-radius: 8px;
+}
+
+.sidebar-menu .ant-menu-item:hover {
+  background: rgba(255,255,255,0.15) !important;
+}
+
+.sidebar-menu .ant-menu-item-selected {
+  background: #1890ff !important;
 }

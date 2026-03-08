@@ -1,19 +1,25 @@
-*{
+* {
     margin: 0;
     padding: 0;
-    
+
 
 }
-body{
+
+body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background:linear-gradient(
-      135deg,
-      #EAF7FF,
-      #E3F6FF,
-      #F0FBFF
-  );
+    background: linear-gradient(135deg,
+            #EAF7FF,
+            #E3F6FF,
+            #F0FBFF);
 }
-.App{
-    margin-left: 5%;
-    margin-right: 5%;
+
+.app-layout {
+    display: flex;
+}
+
+/* phần nội dung */
+.main-content {
+    margin-left: 220px;
+    /* bằng width sidebar */
+    width: 100%;
 }

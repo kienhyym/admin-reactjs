@@ -4,7 +4,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import lessons from "../../data/LessonListdata";
 import { useEffect } from "react";
 import { deleteLectureDetailApi, getLectureDetailApi, updateBaiGiang } from "../../util/api";
-import { Card, Form, Input, Upload, Button, List, Space, message, Spin } from "antd";
+import { Card, Form, Input, Upload, Button, List, Space, message, Spin, Image } from "antd";
 import {
     UploadOutlined,
     DeleteOutlined
@@ -18,7 +18,8 @@ const LessonDetail = () => {
     const [newVideos, setNewVideos] = useState([]);
     const [loading, setloading] = useState(false)
     const [loading2, setloading2] = useState(false)
-
+    const [thumbnail, setThumbnail] = useState([]);
+    console.log('lesson',lesson)
     const handleDeleteVideo = (video) => {
         const newDeletedVideos = [...deletedVideos, video._id]
         setDeletedVideos(newDeletedVideos);
@@ -48,7 +49,10 @@ const LessonDetail = () => {
             const formData = new FormData();
 
             formData.append("title", values.title);
-
+            // thumbnail mới
+            if (thumbnail.length > 0) {
+                formData.append("thumbnail", thumbnail[0].originFileObj);
+            }
             // video mới
             newVideos.forEach(file => {
                 formData.append("videos", file.originFileObj);
@@ -60,9 +64,9 @@ const LessonDetail = () => {
 
             await updateBaiGiang(id, formData);
             setloading(false)
-         
+
             message.success("Cập nhật bài giảng thành công");
-               window.location.reload();
+            window.location.reload();
 
         } catch (error) {
             setloading(false)
@@ -114,7 +118,35 @@ const LessonDetail = () => {
                 >
                     <Input placeholder="Nhập tên bài giảng" />
                 </Form.Item>
+                <div style={{ marginBottom: 20 }}>
+                    <h4>Thumbnail hiện tại</h4>
 
+                    {lesson?.lecture?.thumbnail && (
+                        <Image
+                            src={lesson?.lecture?.thumbnail}
+                            height={200}
+                        />
+                    )}
+                </div>
+                <Form.Item
+                    label="Thumbnail"
+                    name="thumbnail"
+                    valuePropName="fileList"
+                    getValueFromEvent={(e) => {
+                        setThumbnail(e?.fileList || []);
+                        return e?.fileList;
+                    }}
+                >
+                    <Upload
+                        beforeUpload={() => false}
+                        maxCount={1}
+                        listType="picture"
+                    >
+                        <Button icon={<UploadOutlined />}>
+                            Upload thumbnail
+                        </Button>
+                    </Upload>
+                </Form.Item>
 
                 <Form.Item label="Danh sách video">
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Table, Button, Space, Input, message } from "antd";
+import { Table, Button, Space, Input, message, Image } from "antd";
 import {
   EyeOutlined,
   PlusOutlined
@@ -15,14 +15,14 @@ const LessonList = () => {
   const [data, setData] = useState([])
   const navigate = useNavigate()
 
- useEffect(() => {
+  useEffect(() => {
     const festAccount = async () => {
       const res = await getLecturesApi()
       if (res) {
         setData(res.data)
-        console.log("res lectures:",'res:', res.data);
+        console.log("res lectures:", 'res:', res.data);
       }
-      else{
+      else {
         console.log("res lectures error:");
       }
     }
@@ -44,19 +44,22 @@ const LessonList = () => {
       dataIndex: "videos",
       render: (videos) => (
         <p>
-         {videos?.length}
+          {videos?.length}
         </p>
       )
     },
-    // {
-    //   title: "Thời lượng",
-    //   dataIndex: "duration"
-    // },
+    {
+      title: "hình ảnh",
+      dataIndex: "thumbnail",
+      render: (data) => (
+        <Image src={data} height={50} />
+      )
+    },
     {
       title: "Hành động",
       render: (item) => (
         <Space>
-          <Button type="primary" icon={<EyeOutlined />}  onClick={()=> navigate(item._id)}/>
+          <Button type="primary" icon={<EyeOutlined />} onClick={() => navigate(item._id)} />
         </Space>
       )
     }
@@ -71,7 +74,13 @@ const LessonList = () => {
 
       const formData = new FormData();
       formData.append("title", values.title);
-
+      // thumbnail
+      if (values.thumbnail?.length > 0) {
+        formData.append(
+          "thumbnail",
+          values.thumbnail[0].originFileObj
+        );
+      }
       values.videos.forEach(file => {
         formData.append("videos", file.originFileObj);
       });

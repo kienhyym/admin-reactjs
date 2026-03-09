@@ -40,15 +40,39 @@ const getAccountApi = () => {
 
 const uploadBaiGiang = (value) => {
     const URL_API = `/v1/api/lecture`;
-    return axios.post(URL_API,value, {
-    headers: {
-      "Content-Type": "multipart/form-data"
-    }
-  });
+    return axios.post(URL_API, value, {
+        headers: {
+            "Content-Type": "multipart/form-data"
+        }
+    });
+}
+const updateBaiGiang = (id,value) => {
+    const URL_API = `/v1/api/lecture/`+id;
+    return axios.put(URL_API, value, {
+        headers: {
+            "Content-Type": "multipart/form-data"
+        }
+    });
 }
 const getLecturesApi = () => {
     const URL_API = `/v1/api/lectures`;
     return axios.get(URL_API);
 }
+const getLectureDetailApi = (value) => {
+    const URL_API = `/v1/api/lecture/` + value;
+    return axios.get(URL_API);
+}
+const deleteLectureDetailApi = (value) => {
+    const URL_API = `/v1/api/lecture/` + value;
+    return axios.delete(URL_API);
+}
 
-export { createrUserApi, loginApi, getUsersApi, homeApi, getAccountApi , uploadBaiGiang,getLecturesApi}
+export {
+    createrUserApi,
+    loginApi, getUsersApi,
+    homeApi, getAccountApi,
+    uploadBaiGiang, getLecturesApi,
+    getLectureDetailApi,
+    updateBaiGiang,
+    deleteLectureDetailApi
+}

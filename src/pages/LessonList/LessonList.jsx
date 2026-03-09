@@ -1,18 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { Table, Button, Space, Input, message } from "antd";
 import {
-  EditOutlined,
-  DeleteOutlined,
+  EyeOutlined,
   PlusOutlined
 } from "@ant-design/icons";
 import "./LessonList.css";
 import AddLessonModal from "./AddLessonModal";
 import { getLecturesApi, uploadBaiGiang } from "../../util/api";
+import { useNavigate } from "react-router-dom";
 
 const LessonList = () => {
   const [openModal, setOpenModal] = useState(false);
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState([])
+  const navigate = useNavigate()
 
  useEffect(() => {
     const festAccount = async () => {
@@ -43,7 +44,7 @@ const LessonList = () => {
       dataIndex: "videos",
       render: (videos) => (
         <p>
-         {videos.length}
+         {videos?.length}
         </p>
       )
     },
@@ -53,10 +54,9 @@ const LessonList = () => {
     // },
     {
       title: "Hành động",
-      render: () => (
+      render: (item) => (
         <Space>
-          <Button type="primary" icon={<EditOutlined />} />
-          <Button danger icon={<DeleteOutlined />} />
+          <Button type="primary" icon={<EyeOutlined />}  onClick={()=> navigate(item._id)}/>
         </Space>
       )
     }
@@ -130,8 +130,9 @@ const LessonList = () => {
 
       <Table
         columns={columns}
+        rowKey="_id"
         dataSource={data}
-        pagination={{ pageSize: 5 }}
+        pagination={{ pageSize: 10 }}
         loading={loading}
       />
 

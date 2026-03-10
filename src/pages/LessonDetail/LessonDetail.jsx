@@ -80,7 +80,6 @@ const LessonDetail = () => {
         const festAccount = async () => {
             const res = await getLectureDetailApi(id)
             if (res) {
-                console.log("res==========>res:", res.data?.videos);
                 setLesson(res.data)
             }
             else {

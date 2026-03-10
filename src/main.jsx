@@ -15,6 +15,7 @@ import LessonDetail from './pages/LessonDetail/LessonDetail.jsx'
 import KnowledgePage from './pages/Knowledge/KnowledgePage.jsx'
 import ExtendPage from './pages/ExtendPage/ExtendPage.jsx'
 import WelcomePage from './pages/WelcomePage/WelcomePage.jsx'
+import ExtendDetailPage from './pages/ExtendDetailPage/ExtendDetailPage.jsx'
 
 
 const router = createBrowserRouter([
@@ -55,6 +56,10 @@ const router = createBrowserRouter([
       {
         path: "extend",
         element: <ExtendPage />
+      },
+         {
+        path: 'extend/:id',   // ✅ dynamic route
+        element: <ExtendDetailPage />
       },
     ]
   },

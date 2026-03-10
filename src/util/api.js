@@ -46,8 +46,8 @@ const uploadBaiGiang = (value) => {
         }
     });
 }
-const updateBaiGiang = (id,value) => {
-    const URL_API = `/v1/api/lecture/`+id;
+const updateBaiGiang = (id, value) => {
+    const URL_API = `/v1/api/lecture/` + id;
     return axios.put(URL_API, value, {
         headers: {
             "Content-Type": "multipart/form-data"
@@ -67,6 +67,40 @@ const deleteLectureDetailApi = (value) => {
     return axios.delete(URL_API);
 }
 
+const getCountExamStatusByLecture = (value) => {
+    const URL_API = `/v1/api/lectures/` + value + "/exams/status-count";
+    return axios.get(URL_API);
+}
+
+
+const uploadExtend = (value) => {
+    const URL_API = `/v1/api/extend`;
+    return axios.post(URL_API, value, {
+        headers: {
+            "Content-Type": "multipart/form-data"
+        }
+    });
+}
+const updateExtend = (id, value) => {
+    const URL_API = `/v1/api/extend/` + id;
+    return axios.put(URL_API, value, {
+        headers: {
+            "Content-Type": "multipart/form-data"
+        }
+    });
+}
+const getExtend = () => {
+    const URL_API = `/v1/api/extend`;
+    return axios.get(URL_API);
+}
+const getExtendDetail = (value) => {
+    const URL_API = `/v1/api/extend/` + value;
+    return axios.get(URL_API);
+}
+const deleteLExtend = (value) => {
+    const URL_API = `/v1/api/extend/` + value;
+    return axios.delete(URL_API);
+}
 export {
     createrUserApi,
     loginApi, getUsersApi,
@@ -74,5 +108,8 @@ export {
     uploadBaiGiang, getLecturesApi,
     getLectureDetailApi,
     updateBaiGiang,
-    deleteLectureDetailApi
+    deleteLectureDetailApi,
+    getCountExamStatusByLecture,
+    uploadExtend, getExtend, getExtendDetail, deleteLExtend, updateExtend
+
 }

@@ -20,7 +20,6 @@ const LessonList = () => {
       const res = await getLecturesApi()
       if (res) {
         setData(res.data)
-        console.log("res lectures:", 'res:', res.data);
       }
       else {
         console.log("res lectures error:");

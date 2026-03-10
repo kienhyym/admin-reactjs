@@ -17,9 +17,7 @@ function App() {
     setLoading(true);
     const festAccount = async () => {
       const res = await axios.get(`/v1/api/account`)
-      console.log('res:', res);
       if (res && res?.email) {
-        console.log("res account:");
         setAtuh({
           isAuthenticated: true,
           user: {

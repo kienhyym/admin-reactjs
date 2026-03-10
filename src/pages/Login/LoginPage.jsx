@@ -14,7 +14,6 @@ const LoginPage = () => {
     const { email, password } = values;
 
     const res = await loginApi(email, password);
-    console.log("res:", res);
     if (res && res.EC === 0) {
       localStorage.setItem("token", res.access_token);
 

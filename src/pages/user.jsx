@@ -23,7 +23,6 @@ const UserPage = () => {
     useEffect(() => {
         const fetchData = async () => {
             const res = await getUsersApi();
-            console.log('res:', res);
             if (!res?.message) {
                 setDataSource(res);
             }else{

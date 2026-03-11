@@ -45,7 +45,6 @@ const LessonDetail = () => {
     const handleUpdate = async (values) => {
         setloading(true)
         try {
-
             const formData = new FormData();
 
             formData.append("title", values.title);

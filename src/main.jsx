@@ -12,7 +12,8 @@ import QuizPage from './pages/QuizPage/QuizPage.jsx'
 import QuestionListPage from './pages/QuestionListPage/QuestionListPage.jsx'
 import LessonList from './pages/LessonList/LessonList.jsx'
 import LessonDetail from './pages/LessonDetail/LessonDetail.jsx'
-import KnowledgePage from './pages/Knowledge/KnowledgePage.jsx'
+import KnowledgePage from './pages/KnowledgePage/KnowledgePage.jsx'
+import KnowledgeDetailPage from './pages/KnowledgeDetailPage/KnowledgeDetailPage.jsx'
 import ExtendPage from './pages/ExtendPage/ExtendPage.jsx'
 import WelcomePage from './pages/WelcomePage/WelcomePage.jsx'
 import ExtendDetailPage from './pages/ExtendDetailPage/ExtendDetailPage.jsx'
@@ -52,7 +53,10 @@ const router = createBrowserRouter([
         path: "knowledge",
         element: <KnowledgePage />
       },
-
+   {
+        path: 'knowledge/:id',   // ✅ dynamic route
+        element: <KnowledgeDetailPage />
+      },
       {
         path: "extend",
         element: <ExtendPage />

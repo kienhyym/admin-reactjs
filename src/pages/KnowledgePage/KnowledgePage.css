@@ -1,0 +1,14 @@
+.knowledge-page {
+  padding: 20px;
+}
+
+.knowledge-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.knowledge-actions {
+  display: flex;
+  gap: 10px;
+}

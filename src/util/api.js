@@ -101,6 +101,38 @@ const deleteLExtend = (value) => {
     const URL_API = `/v1/api/extend/` + value;
     return axios.delete(URL_API);
 }
+
+
+
+
+const uploadKnowledge = (value) => {
+    const URL_API = `/v1/api/knowledge`;
+    return axios.post(URL_API, value, {
+        headers: {
+            "Content-Type": "multipart/form-data"
+        }
+    });
+}
+const updateKnowledge = (id, value) => {
+    const URL_API = `/v1/api/knowledge/` + id;
+    return axios.put(URL_API, value, {
+        headers: {
+            "Content-Type": "multipart/form-data"
+        }
+    });
+}
+const getKnowledge = () => {
+    const URL_API = `/v1/api/knowledge`;
+    return axios.get(URL_API);
+}
+const getKnowledgeDetail= (value) => {
+    const URL_API = `/v1/api/knowledge/` + value;
+    return axios.get(URL_API);
+}
+const deleteLKnowledge = (value) => {
+    const URL_API = `/v1/api/knowledge/` + value;
+    return axios.delete(URL_API);
+}
 export {
     createrUserApi,
     loginApi, getUsersApi,
@@ -110,6 +142,7 @@ export {
     updateBaiGiang,
     deleteLectureDetailApi,
     getCountExamStatusByLecture,
-    uploadExtend, getExtend, getExtendDetail, deleteLExtend, updateExtend
+    uploadExtend, getExtend, getExtendDetail, deleteLExtend, updateExtend,
+    uploadKnowledge,updateKnowledge,getKnowledge,getKnowledgeDetail,deleteLKnowledge
 
 }

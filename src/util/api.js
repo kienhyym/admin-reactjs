@@ -133,6 +133,21 @@ const deleteLKnowledge = (value) => {
     const URL_API = `/v1/api/knowledge/` + value;
     return axios.delete(URL_API);
 }
+
+const importQuizz = (lectureId,questions) => {
+    const URL_API = `/v1/api/lectures/${lectureId}/questions/import`;
+
+    return axios.post(URL_API, questions, {
+        headers: {
+            "Content-Type": "multipart/form-data"
+        }
+    });
+}
+const getQuestionsByLecture= (value) => {
+    const URL_API = `/v1/api//lectures/${value}/questions/`;
+    return axios.get(URL_API);
+}
+
 export {
     createrUserApi,
     loginApi, getUsersApi,
@@ -143,6 +158,7 @@ export {
     deleteLectureDetailApi,
     getCountExamStatusByLecture,
     uploadExtend, getExtend, getExtendDetail, deleteLExtend, updateExtend,
-    uploadKnowledge,updateKnowledge,getKnowledge,getKnowledgeDetail,deleteLKnowledge
+    uploadKnowledge,updateKnowledge,getKnowledge,getKnowledgeDetail,deleteLKnowledge,
+    importQuizz,getQuestionsByLecture
 
 }

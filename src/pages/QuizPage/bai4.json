@@ -1,0 +1,206 @@
+{
+  "data": [
+    {
+      "content": "Cho phát biểu: “Dung dịch là hỗn hợp ………… của chất tan và dung môi”. Từ còn thiếu là",
+      "type": "single",
+      "image": null,
+      "options": [
+        { "content": "huyền phù", "image": null, "isCorrect": false },
+        { "content": "đồng nhất", "image": null, "isCorrect": true },
+        { "content": "chưa đồng nhất", "image": null, "isCorrect": false },
+        { "content": "chưa tan", "image": null, "isCorrect": false }
+      ]
+    },
+    {
+      "content": "Cho muối ăn vào nước và khuấy đều ta thu được",
+      "type": "single",
+      "image": null,
+      "options": [
+        { "content": "huyền phù", "image": null, "isCorrect": false },
+        { "content": "dung dịch", "image": null, "isCorrect": true },
+        { "content": "nhũ tương", "image": null, "isCorrect": false },
+        { "content": "dung môi", "image": null, "isCorrect": false }
+      ]
+    },
+    {
+      "content": "Hòa tan đường vào cốc nước ta thu được dung dịch nước đường. Chất tan là",
+      "type": "single",
+      "image": null,
+      "options": [
+        { "content": "nước và đường", "image": null, "isCorrect": false },
+        { "content": "đường", "image": null, "isCorrect": true },
+        { "content": "nước", "image": null, "isCorrect": false },
+        { "content": "nước đường", "image": null, "isCorrect": false }
+      ]
+    },
+    {
+      "content": "Chất nào sau đây không tan trong nước ở điều kiện thường?",
+      "type": "single",
+      "image": null,
+      "options": [
+        { "content": "Oxygen", "image": null, "isCorrect": false },
+        { "content": "Muối ăn", "image": null, "isCorrect": false },
+        { "content": "Copper(II) sulfate", "image": null, "isCorrect": false },
+        { "content": "Bột sắt", "image": null, "isCorrect": true }
+      ]
+    },
+    {
+      "content": "Nồng độ mol cho biết",
+      "type": "single",
+      "image": null,
+      "options": [
+        { "content": "số mol chất tan có trong 1 lít dung dịch", "image": null, "isCorrect": true },
+        { "content": "số gam chất tan trong 1 lít nước", "image": null, "isCorrect": false },
+        { "content": "số mol chất không tan trong 100 gam dung dịch", "image": null, "isCorrect": false },
+        { "content": "số gam chất tan trong 100 gam nước", "image": null, "isCorrect": false }
+      ]
+    },
+    {
+      "content": "Nồng độ phần trăm cho biết",
+      "type": "single",
+      "image": null,
+      "options": [
+        { "content": "số mol chất tan có trong 1 lít dung dịch", "image": null, "isCorrect": false },
+        { "content": "số gam chất tan trong 1 lít nước", "image": null, "isCorrect": false },
+        { "content": "số mol chất không tan trong 100 gam dung dịch", "image": null, "isCorrect": false },
+        { "content": "số gam chất tan có trong 100 gam dung dịch", "image": null, "isCorrect": true }
+      ]
+    },
+    {
+      "content": "Dung dịch chưa bão hòa là dung dịch",
+      "type": "single",
+      "image": null,
+      "options": [
+        { "content": "không thể hòa tan thêm chất tan", "image": null, "isCorrect": false },
+        { "content": "có thể hòa tan thêm chất tan", "image": null, "isCorrect": true },
+        { "content": "không thể hòa tan thêm nước", "image": null, "isCorrect": false },
+        { "content": "có thể hòa tan thêm dung dịch", "image": null, "isCorrect": false }
+      ]
+    },
+    {
+      "content": "Dung dịch bão hòa là dung dịch",
+      "type": "single",
+      "image": null,
+      "options": [
+        { "content": "không thể hòa tan thêm chất tan", "image": null, "isCorrect": true },
+        { "content": "có thể hòa tan thêm chất tan", "image": null, "isCorrect": false },
+        { "content": "không thể hòa tan thêm nước", "image": null, "isCorrect": false },
+        { "content": "có thể hòa tan thêm dung dịch", "image": null, "isCorrect": false }
+      ]
+    },
+    {
+      "content": "Độ tan của một chất trong nước là",
+      "type": "single",
+      "image": null,
+      "options": [
+        { "content": "số gam chất đó tan trong 100 gam nước để tạo thành dung dịch bão hòa ở nhiệt độ, áp suất xác định", "image": null, "isCorrect": true },
+        { "content": "số gam chất đó tan trong 1 lít nước để tạo thành dung dịch bão hòa", "image": null, "isCorrect": false },
+        { "content": "số gam chất đó không tan trong 100 gam nước", "image": null, "isCorrect": false },
+        { "content": "số gam chất đó tan trong 100 gam nước để tạo thành dung dịch chưa bão hòa", "image": null, "isCorrect": false }
+      ]
+    },
+    {
+      "content": "Độ tan của hầu hết các chất rắn phụ thuộc vào",
+      "type": "single",
+      "image": null,
+      "options": [
+        { "content": "môi trường", "image": null, "isCorrect": false },
+        { "content": "nhiệt độ", "image": null, "isCorrect": true },
+        { "content": "áp suất", "image": null, "isCorrect": false },
+        { "content": "loại chất", "image": null, "isCorrect": false }
+      ]
+    },
+    {
+      "content": "Khi tăng nhiệt độ thì độ tan của hầu hết chất rắn trong nước",
+      "type": "single",
+      "image": null,
+      "options": [
+        { "content": "biến đổi ít", "image": null, "isCorrect": false },
+        { "content": "tăng", "image": null, "isCorrect": true },
+        { "content": "giảm", "image": null, "isCorrect": false },
+        { "content": "không đổi", "image": null, "isCorrect": false }
+      ]
+    },
+    {
+      "content": "Khi sản xuất nước ngọt có gas người ta nén khí CO2 ở áp suất cao nhằm",
+      "type": "single",
+      "image": null,
+      "options": [
+        { "content": "tăng khả năng hòa tan của CO2 trong nước", "image": null, "isCorrect": true },
+        { "content": "giảm khả năng hòa tan của CO2 trong nước", "image": null, "isCorrect": false },
+        { "content": "không làm thay đổi độ tan", "image": null, "isCorrect": false },
+        { "content": "giảm nhanh lượng CO2 trong nước", "image": null, "isCorrect": false }
+      ]
+    },
+    {
+      "content": "Để pha 500 g nước muối sinh lí NaCl 0,9% cần",
+      "type": "single",
+      "image": null,
+      "options": [
+        { "content": "4,5 g NaCl và 495,5 g nước", "image": null, "isCorrect": true },
+        { "content": "5,4 g NaCl và 494,6 g nước", "image": null, "isCorrect": false },
+        { "content": "4,5 g NaCl và 504,5 g nước", "image": null, "isCorrect": false },
+        { "content": "5,4 g NaCl và 505,4 g nước", "image": null, "isCorrect": false }
+      ]
+    },
+    {
+      "content": "Khối lượng NaOH có trong 300 mL dung dịch 0,15 M là",
+      "type": "single",
+      "image": null,
+      "options": [
+        { "content": "1,8 g", "image": null, "isCorrect": true },
+        { "content": "0,045 g", "image": null, "isCorrect": false },
+        { "content": "4,5 g", "image": null, "isCorrect": false },
+        { "content": "0,125 g", "image": null, "isCorrect": false }
+      ]
+    },
+    {
+      "content": "Khối lượng H2O2 có trong 30 g dung dịch nồng độ 3% là",
+      "type": "single",
+      "image": null,
+      "options": [
+        { "content": "10 g", "image": null, "isCorrect": false },
+        { "content": "3 g", "image": null, "isCorrect": false },
+        { "content": "0,9 g", "image": null, "isCorrect": true },
+        { "content": "0,1 g", "image": null, "isCorrect": false }
+      ]
+    },
+
+    {
+      "content": "Hòa tan đường vào nước thu được dung dịch nước đường.",
+      "type": "true_false",
+      "image": null,
+      "options": [
+        { "content": "Đúng", "image": null, "isCorrect": true },
+        { "content": "Sai", "image": null, "isCorrect": false }
+      ]
+    },
+    {
+      "content": "Cho 1 mL nước vào 10 mL ethanol: nước là dung môi, ethanol là chất tan.",
+      "type": "true_false",
+      "image": null,
+      "options": [
+        { "content": "Đúng", "image": null, "isCorrect": false },
+        { "content": "Sai", "image": null, "isCorrect": true }
+      ]
+    },
+    {
+      "content": "Cho xăng vào nước thu được dung dịch xăng trong nước.",
+      "type": "true_false",
+      "image": null,
+      "options": [
+        { "content": "Đúng", "image": null, "isCorrect": false },
+        { "content": "Sai", "image": null, "isCorrect": true }
+      ]
+    },
+    {
+      "content": "Dung dịch có thể hòa tan thêm chất tan gọi là dung dịch chưa bão hòa.",
+      "type": "true_false",
+      "image": null,
+      "options": [
+        { "content": "Đúng", "image": null, "isCorrect": true },
+        { "content": "Sai", "image": null, "isCorrect": false }
+      ]
+    }
+  ]
+}

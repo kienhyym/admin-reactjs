@@ -125,7 +125,7 @@ const getKnowledge = () => {
     const URL_API = `/v1/api/knowledge`;
     return axios.get(URL_API);
 }
-const getKnowledgeDetail= (value) => {
+const getKnowledgeDetail = (value) => {
     const URL_API = `/v1/api/knowledge/` + value;
     return axios.get(URL_API);
 }
@@ -134,7 +134,7 @@ const deleteLKnowledge = (value) => {
     return axios.delete(URL_API);
 }
 
-const importQuizz = (lectureId,questions) => {
+const importQuizz = (lectureId, questions) => {
     const URL_API = `/v1/api/lectures/${lectureId}/questions/import`;
 
     return axios.post(URL_API, questions, {
@@ -143,9 +143,13 @@ const importQuizz = (lectureId,questions) => {
         }
     });
 }
-const getQuestionsByLecture= (value) => {
+const getQuestionsByLecture = (value) => {
     const URL_API = `/v1/api//lectures/${value}/questions/`;
     return axios.get(URL_API);
+}
+const updateTitleVideo = (id, value) => {
+    const URL_API = `/v1/api/video/${id}`;
+    return axios.put(URL_API, value);
 }
 
 export {
@@ -158,7 +162,7 @@ export {
     deleteLectureDetailApi,
     getCountExamStatusByLecture,
     uploadExtend, getExtend, getExtendDetail, deleteLExtend, updateExtend,
-    uploadKnowledge,updateKnowledge,getKnowledge,getKnowledgeDetail,deleteLKnowledge,
-    importQuizz,getQuestionsByLecture
-
+    uploadKnowledge, updateKnowledge, getKnowledge, getKnowledgeDetail, deleteLKnowledge,
+    importQuizz, getQuestionsByLecture,
+updateTitleVideo
 }

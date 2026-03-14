@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import "./LessonDetail.css";
 import { useParams, useNavigate } from "react-router-dom";
-import lessons from "../../data/LessonListdata";
-import { useEffect } from "react";
-import { deleteLectureDetailApi, getLectureDetailApi, updateBaiGiang } from "../../util/api";
+import { Modal } from "antd"; import { useEffect } from "react";
+import { deleteLectureDetailApi, getLectureDetailApi, updateBaiGiang, updateTitleVideo } from "../../util/api";
 import { Card, Form, Input, Upload, Button, List, Space, message, Spin, Image } from "antd";
 import {
     UploadOutlined,
@@ -19,7 +18,47 @@ const LessonDetail = () => {
     const [loading, setloading] = useState(false)
     const [loading2, setloading2] = useState(false)
     const [thumbnail, setThumbnail] = useState([]);
-    console.log('lesson',lesson)
+
+    const [editVideoModal, setEditVideoModal] = useState(false);
+    const [editingVideo, setEditingVideo] = useState(null);
+    const [videoTitle, setVideoTitle] = useState("");
+
+    const openEditVideo = (video) => {
+        setEditingVideo(video);
+        setVideoTitle(video.displayName);
+        setEditVideoModal(true);
+    };
+
+    const handleUpdateVideoTitle = async () => {
+
+        try {
+            const res = await updateTitleVideo(editingVideo._id, { title: videoTitle })
+            if (res.data) {
+                setLesson(prev => ({
+                    ...prev,
+                    videos: prev.videos.map(v =>
+                        v._id === editingVideo._id
+                            ? { ...v, displayName: videoTitle }
+                            : v
+                    )
+                }));
+                setEditVideoModal(false);
+                message.success("Cập nhật tiêu đề video thành công");
+            } else {
+                setEditVideoModal(false);
+                message.error(res.message);
+            }
+        } catch (error) {
+            setEditVideoModal(false);
+            message.error(error.message);
+
+        }
+
+    };
+
+
+
+    console.log('lesson', lesson)
     const handleDeleteVideo = (video) => {
         const newDeletedVideos = [...deletedVideos, video._id]
         setDeletedVideos(newDeletedVideos);
@@ -160,11 +199,17 @@ const LessonDetail = () => {
                                         onClick={() => handleDeleteVideo(video)}
                                     >
                                         Xoá
+                                    </Button>,
+                                    <Button
+                                        type="primary"
+                                        onClick={() => openEditVideo(video)}
+                                    >
+                                        Sửa tiêu đề
                                     </Button>
                                 ]}
                             >
                                 <Space direction="vertical">
-                                    <span>Video {index + 1}</span>
+                                    <span>{video?.displayName}</span>
                                     <video
                                         width="300"
                                         controls
@@ -213,7 +258,18 @@ const LessonDetail = () => {
                 }
 
             </Form>
-
+            <Modal
+                title="Sửa tiêu đề video"
+                open={editVideoModal}
+                onCancel={() => setEditVideoModal(false)}
+                onOk={handleUpdateVideoTitle}
+            >
+                <Input
+                    value={videoTitle}
+                    onChange={(e) => setVideoTitle(e.target.value)}
+                    placeholder="Nhập tiêu đề video"
+                />
+            </Modal>
         </Card>
     );
 };

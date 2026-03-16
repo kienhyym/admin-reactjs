@@ -1,0 +1,75 @@
+.question-page {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 30px;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+}
+
+.question-page h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-weight: 600;
+}
+
+/* Question row */
+
+.question-page .ant-space {
+  width: 100%;
+}
+
+/* textarea */
+
+.question-page textarea {
+  resize: none;
+}
+
+/* upload */
+
+.question-page .ant-upload.ant-upload-select-picture-card {
+  width: 110px;
+  height: 110px;
+}
+
+/* answer row */
+
+.question-page .answer-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+/* answer input */
+
+.question-page .answer-input {
+  width: 350px;
+}
+
+/* delete icon */
+
+.question-page .anticon-delete {
+  cursor: pointer;
+  color: #ff4d4f;
+  font-size: 18px;
+}
+
+.question-page .anticon-delete:hover {
+  color: #ff7875;
+}
+
+/* add answer button */
+
+.question-page .add-answer-btn {
+  margin-top: 10px;
+}
+
+/* save button */
+
+.question-page .save-btn {
+  margin-top: 30px;
+  width: 140px;
+  height: 40px;
+  font-weight: 500;
+}

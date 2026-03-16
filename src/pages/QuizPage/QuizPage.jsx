@@ -1,14 +1,25 @@
 import React, { useEffect, useState } from "react";
-import { Card, Upload, Button, Table, message } from "antd";
-import { UploadOutlined } from "@ant-design/icons";
-import { useParams } from "react-router-dom";
-import { getQuestionsByLecture, importQuizz } from "../../util/api";
+import { Card, Upload, Button, Table, message, Space } from "antd";
+import { EyeOutlined, UploadOutlined } from "@ant-design/icons";
+import { useNavigate, useParams } from "react-router-dom";
+import { createQuestionWithOptions, getQuestionsByLecture, importQuizz } from "../../util/api";
+import AddQuestionModal from "./AddQuestionModal";
 
 const QuizDetail = () => {
-
+  const navigate = useNavigate()
   const { lessonId } = useParams();
   const id = lessonId
   const [questions, setQuestions] = useState([]);
+  const [openModal, setOpenModal] = useState(false);
+
+  const handleAddQuestion = async (values) => {
+    try {
+      console.log("12345676809", id)
+      await createQuestionWithOptions(id, values)
+    } catch (error) {
+      console.log(error)
+    }
+  };
   useEffect(() => {
     const getData = async () => {
       const res = await getQuestionsByLecture(id)
@@ -35,6 +46,14 @@ const QuizDetail = () => {
     {
       title: "Loại câu hỏi",
       dataIndex: "type"
+    },
+     {
+      title: "hành động",
+      render: (item) => (
+        <Space>
+          <Button type="primary" icon={<EyeOutlined />} onClick={() => navigate("question/"+item._id)} />
+        </Space>
+      )
     }
   ];
   const handleImport = async (file) => {
@@ -69,13 +88,16 @@ const QuizDetail = () => {
               return false;
             }}
           >
+
             <Button icon={<UploadOutlined />}>
               Import JSON
             </Button>
           </Upload>
         }
       >
-
+        <Button type="primary" onClick={() => setOpenModal(true)}>
+          Thêm câu hỏi
+        </Button>
         <Table
           columns={columns}
           dataSource={questions}
@@ -85,6 +107,11 @@ const QuizDetail = () => {
         />
 
       </Card>
+
+      <AddQuestionModal
+        open={openModal}
+        onCancel={() => setOpenModal(false)}
+        onSubmit={handleAddQuestion} />
 
     </div>
   );

@@ -23,14 +23,14 @@ const QuestionListPageCard = ({ data }) => {
         <div key={data._id} className="question-card">
             <div className="question-info">
                 <h3>{data?.title}</h3>
-                <p>{count?.open} câu hỏi đang mở - {count?.closed} câu hỏi đang đóng</p>
+                {/* <p>{count?.open} câu hỏi đang mở - {count?.closed} câu hỏi đang đóng</p> */}
             </div>
 
             <button
                 className="start-btn" 
                 onClick={() => navigate(`/quiz/${data._id}`)}
             >
-                Làm bài
+                Chỉnh sửa
             </button>
         </div>
     );

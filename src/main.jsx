@@ -17,6 +17,7 @@ import KnowledgeDetailPage from './pages/KnowledgeDetailPage/KnowledgeDetailPage
 import ExtendPage from './pages/ExtendPage/ExtendPage.jsx'
 import WelcomePage from './pages/WelcomePage/WelcomePage.jsx'
 import ExtendDetailPage from './pages/ExtendDetailPage/ExtendDetailPage.jsx'
+import QuestionDetailPage from './pages/QuestionDetail/QuestionDetail.jsx'
 
 
 const router = createBrowserRouter([
@@ -65,6 +66,11 @@ const router = createBrowserRouter([
         path: 'extend/:id',   // ✅ dynamic route
         element: <ExtendDetailPage />
       },
+      {
+        path: 'quiz/:id/question/:questionId',   // ✅ dynamic route
+        element: <QuestionDetailPage />
+      },
+
     ]
   },
 

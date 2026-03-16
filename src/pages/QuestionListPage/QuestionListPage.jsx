@@ -6,6 +6,7 @@ import QuestionListPageCard from "./QuestionListPageCard/QuestionListPageCard";
 
 const QuestionListPage = () => {
   const navigate = useNavigate();
+  
   const [data, setData] = useState([])
   useEffect(() => {
     const festAccount = async () => {
@@ -22,10 +23,10 @@ const QuestionListPage = () => {
   return (
     <div className="question-container">
       <h1 className="page-title">🧪 Câu hỏi ôn tập theo bài</h1>
-
       <div className="question-grid">
         {data.map((lesson) => (<QuestionListPageCard data={lesson} key={lesson._id} />))}
       </div>
+   
     </div>
   );
 };

@@ -152,6 +152,33 @@ const updateTitleVideo = (id, value) => {
     return axios.put(URL_API, value);
 }
 
+const createQuestionWithOptions = (id, value) => {
+    const URL_API = `/v1/api/questions/options/` + id;
+    return axios.post(URL_API, value, {
+        headers: {
+            "Content-Type": "multipart/form-data"
+        }
+    });
+}
+const updateQuestionWithOptions = (id, value) => {
+    const URL_API = `/v1/api/question/` + id;
+    return axios.put(URL_API, value, {
+        headers: {
+            "Content-Type": "multipart/form-data"
+        }
+    });
+}
+
+
+const getQuestionDetailById = (id) => {
+    const URL_API = `/v1/api/question/${id}`;
+    return axios.get(URL_API);
+}
+const deleteQuestionById = (id) => {
+    const URL_API = `/v1/api/question/${id}`;
+    return axios.delete(URL_API);
+}
+
 export {
     createrUserApi,
     loginApi, getUsersApi,
@@ -164,5 +191,5 @@ export {
     uploadExtend, getExtend, getExtendDetail, deleteLExtend, updateExtend,
     uploadKnowledge, updateKnowledge, getKnowledge, getKnowledgeDetail, deleteLKnowledge,
     importQuizz, getQuestionsByLecture,
-updateTitleVideo
+    updateTitleVideo, createQuestionWithOptions,getQuestionDetailById,deleteQuestionById,updateQuestionWithOptions
 }

@@ -1,5 +1,5 @@
-import React, { useContext } from "react";
-import { Card, Row, Col } from "antd";
+import React, { useContext, useEffect, useState } from "react";
+import { Card, Row, Col, Table, message } from "antd";
 import {
   UserOutlined,
   ShoppingCartOutlined,
@@ -8,10 +8,64 @@ import {
 } from "@ant-design/icons";
 import { AuthContext } from "../../component/context/authContext";
 import "./HomePage.css";
+import { getAchievements } from "../../util/api";
 
 const HomePage = () => {
+  const [data, setData] = useState([])
 
   const { auth } = useContext(AuthContext);
+  useEffect(() => {
+    const getData = async () => {
+      const res = await getAchievements()
+      if (res) {
+        setData(res.data)
+      }
+      else {
+        message.error("lỗi nhận dữ liệu")
+      }
+    }
+    getData()
+  }, [])
+
+  const columns = [
+    {
+      title: "STT",
+      render: (_, __, index) => index + 1,
+      width: 70
+    },
+    {
+      title: "Tên học sinh",
+      dataIndex: "name",
+      width: 370
+    },
+    {
+      title: "Lớp",
+      dataIndex: "class",
+      width: 250
+    },
+    {
+      title: "Điểm",
+      dataIndex: "result",
+      width: 150
+    },
+    {
+      title: "Bài giảng",
+      render: (item) => (
+        <p>
+          {item?.lecture.title}
+        </p>
+      )
+    },
+    {
+      title: "Thời gian nộp bài",
+      render: (item) => (
+        <p>
+          {new Date(item?.createdAt).toLocaleString("vi-VN")}
+        </p>
+      )
+    },
+  ];
+
 
   return (
     <div className="dashboard-container">
@@ -20,7 +74,8 @@ const HomePage = () => {
         <h1>Xin chào {auth?.user?.name || "Admin"} 👋</h1>
         <p>Chào mừng bạn quay lại hệ thống quản trị</p>
       </div>
-
+      <h3>Danh sách học sinh nộp bài</h3>
+      <br />
       {/* <Row gutter={20}>
 
         <Col span={6}>
@@ -64,6 +119,11 @@ const HomePage = () => {
         </Col>
 
       </Row> */}
+      <Table
+        columns={columns}
+        dataSource={data}
+        rowKey="_id"
+      />
 
     </div>
   );

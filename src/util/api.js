@@ -179,6 +179,11 @@ const deleteQuestionById = (id) => {
     return axios.delete(URL_API);
 }
 
+const getAchievements = () => {
+    const URL_API = `/v1/api/achievements`;
+    return axios.get(URL_API);
+}
+
 export {
     createrUserApi,
     loginApi, getUsersApi,
@@ -191,5 +196,6 @@ export {
     uploadExtend, getExtend, getExtendDetail, deleteLExtend, updateExtend,
     uploadKnowledge, updateKnowledge, getKnowledge, getKnowledgeDetail, deleteLKnowledge,
     importQuizz, getQuestionsByLecture,
-    updateTitleVideo, createQuestionWithOptions,getQuestionDetailById,deleteQuestionById,updateQuestionWithOptions
+    updateTitleVideo, createQuestionWithOptions,getQuestionDetailById,deleteQuestionById,updateQuestionWithOptions,
+    getAchievements
 }

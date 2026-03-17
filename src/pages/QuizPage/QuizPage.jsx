@@ -14,10 +14,18 @@ const QuizDetail = () => {
 
   const handleAddQuestion = async (values) => {
     try {
-      console.log("12345676809", id)
-      await createQuestionWithOptions(id, values)
+      const res = await createQuestionWithOptions(id, values)
+      console.log('res======', res)
+      if (res?.status === 'ok') {
+        setOpenModal(false)
+        message.success("Tạo thành công")
+        window.location.reload()
+      } else {
+        message.error(res.message)
+
+      }
     } catch (error) {
-      console.log(error)
+      message.error(error.message)
     }
   };
   useEffect(() => {
@@ -47,11 +55,11 @@ const QuizDetail = () => {
       title: "Loại câu hỏi",
       dataIndex: "type"
     },
-     {
+    {
       title: "hành động",
       render: (item) => (
         <Space>
-          <Button type="primary" icon={<EyeOutlined />} onClick={() => navigate("question/"+item._id)} />
+          <Button type="primary" icon={<EyeOutlined />} onClick={() => navigate("question/" + item._id)} />
         </Space>
       )
     }

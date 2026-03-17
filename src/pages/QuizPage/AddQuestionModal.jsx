@@ -26,74 +26,71 @@ const QuizBuilderModal = ({ open, onCancel, onSubmit }) => {
 
   const handleOk = async () => {
 
-  try {
+    try {
 
-    const values = await form.validateFields();
+      const values = await form.validateFields();
 
-    const formData = new FormData();
+      const formData = new FormData();
 
-    // question
-    formData.append("question", values.question);
+      // question
+      formData.append("question", values.question);
 
-    formData.append("type", type);
+      formData.append("type", type);
 
-    // question image
-    if (values.questionImage?.length > 0) {
-      formData.append(
-        "questionImage",
-        values.questionImage[0].originFileObj
-      );
-    }
+      // question image
+      if (values.questionImage?.length > 0) {
+        formData.append(
+          "questionImage",
+          values.questionImage[0].originFileObj
+        );
+      }
 
-    // single correct answer
-    if (type === "single") {
-      formData.append("correctAnswer", correctAnswer);
-    }
+      // single correct answer
+      if (type === "single") {
+        formData.append("correctAnswer", correctAnswer);
+      }
 
-    // boolean
-    if (type === "boolean") {
-      formData.append("correctAnswer", values.correctAnswer);
-    }
+      // boolean
+      if (type === "boolean") {
+        formData.append("correctAnswer", values.correctAnswer);
+      }
 
-    // options
-    if (values.options) {
+      // options
+      if (values.options) {
 
-      values.options.forEach((option, index) => {
+        values.options.forEach((option, index) => {
 
-        formData.append(`options[${index}][text]`, option.text);
+          formData.append(`options[${index}][text]`, option.text);
 
-        if (type === "multiple") {
-          formData.append(
-            `options[${index}][isCorrect]`,
-            option.isCorrect || false
-          );
-        }
+          if (type === "multiple") {
+            formData.append(
+              `options[${index}][isCorrect]`,
+              option.isCorrect || false
+            );
+          }
 
-        if (option.image?.length > 0) {
-          formData.append(
-            `options[${index}][image]`,
-            option.image[0].originFileObj
-          );
-        }
+          if (option.image?.length > 0) {
+            formData.append(
+              `options[${index}][image]`,
+              option.image[0].originFileObj
+            );
+          }
 
-      });
+        });
 
-    }
+      }
 
-    onSubmit(formData);
+      onSubmit(formData);
 
-    form.resetFields();
-    setCorrectAnswer(null);
-
-  } catch (error) {
+    } catch (error) {
     console.log('erroe',error);
-  }
+    }
 
-};
+  };
 
   return (
     <Modal
-      title="Quiz Builder"
+      title="Thêm câu hỏi"
       open={open}
       onCancel={onCancel}
       onOk={handleOk}
@@ -104,44 +101,44 @@ const QuizBuilderModal = ({ open, onCancel, onSubmit }) => {
 
         {/* QUESTION */}
 
-        <Form.Item label="Question">
+        <Form.Item label="Câu hỏi">
 
-  <Space align="start">
+          <Space align="start">
 
-    <Form.Item
-      name="question"
-      rules={[{ required: true, message: "Enter question" }]}
-      noStyle
-    >
-      <TextArea
-        rows={3}
-        placeholder="Enter question..."
-        style={{ width: 600 ,height:100}}
-      />
-    </Form.Item>
+            <Form.Item
+              name="question"
+              rules={[{ required: true, message: "Enter question" }]}
+              noStyle
+            >
+              <TextArea
+                rows={3}
+                placeholder="Enter question..."
+                style={{ width: 600, height: 100 }}
+              />
+            </Form.Item>
 
-    <Form.Item
-      name="questionImage"
-      valuePropName="fileList"
-      getValueFromEvent={(e) => e?.fileList}
-      style={{ marginBottom: 0 }}
-    >
-      <Upload
-        beforeUpload={() => false}
-        maxCount={1}
-        listType="picture-card"
-      >
-        <UploadOutlined />
-      </Upload>
-    </Form.Item>
+            <Form.Item
+              name="questionImage"
+              valuePropName="fileList"
+              getValueFromEvent={(e) => e?.fileList}
+              style={{ marginBottom: 0 }}
+            >
+              <Upload
+                beforeUpload={() => false}
+                maxCount={1}
+                listType="picture-card"
+              >
+                <UploadOutlined />
+              </Upload>
+            </Form.Item>
 
-  </Space>
+          </Space>
 
-</Form.Item>
+        </Form.Item>
 
         {/* TYPE */}
 
-        <Form.Item label="Question type">
+        <Form.Item label="Loại câu hỏi">
 
           <Radio.Group
             value={type}
@@ -151,8 +148,6 @@ const QuizBuilderModal = ({ open, onCancel, onSubmit }) => {
             <Radio value="single">Single</Radio>
 
             <Radio value="multiple">Multiple</Radio>
-
-            <Radio value="boolean">True / False</Radio>
 
           </Radio.Group>
 
@@ -285,7 +280,7 @@ const QuizBuilderModal = ({ open, onCancel, onSubmit }) => {
                   onClick={() => add()}
                 >
 
-                  Add answer
+                  Thêm câu trả lời
 
                 </Button>
 

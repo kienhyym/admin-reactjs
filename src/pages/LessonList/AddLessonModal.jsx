@@ -1,7 +1,7 @@
 import { Modal, Form, Input, Upload, Button } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 
-const AddLessonModal = ({ open, onCancel, onSubmit, loading }) => {
+const AddLessonModal = ({ open, onCancel, onSubmit }) => {
 
     const [form] = Form.useForm();
 
@@ -18,7 +18,6 @@ const AddLessonModal = ({ open, onCancel, onSubmit, loading }) => {
             open={open}
             onCancel={onCancel}
             onOk={handleOk}
-            confirmLoading={loading}
         >
 
             <Form

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Table, Button, Space, Input, message, Image } from "antd";
 import {
   EyeOutlined,
@@ -8,24 +8,26 @@ import "./LessonList.css";
 import AddLessonModal from "./AddLessonModal";
 import { getLecturesApi, uploadBaiGiang } from "../../util/api";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../component/context/authContext";
 
 const LessonList = () => {
   const [openModal, setOpenModal] = useState(false);
-  const [loading, setLoading] = useState(false);
   const [data, setData] = useState([])
   const navigate = useNavigate()
-
-  useEffect(() => {
-    const festAccount = async () => {
-      const res = await getLecturesApi()
-      if (res) {
-        setData(res.data)
-      }
-      else {
-        console.log("res lectures error:");
-      }
+  const { setFullPageLoading } = useContext(AuthContext)
+  const getData = async () => {
+    setFullPageLoading(true)
+    const res = await getLecturesApi()
+    if (res) {
+      setData(res.data)
     }
-    festAccount()
+    else {
+      console.log("res lectures error:");
+    }
+    setFullPageLoading(false)
+  }
+  useEffect(() => {
+    getData()
   }, [])
   const columns = [
     {
@@ -66,11 +68,8 @@ const LessonList = () => {
 
   // thêm bài giảng
   const handleAddLesson = async (values) => {
-
     try {
-
-      setLoading(true);
-
+      setFullPageLoading(true)
       const formData = new FormData();
       formData.append("title", values.title);
       // thumbnail
@@ -85,27 +84,19 @@ const LessonList = () => {
       });
 
       const res = await uploadBaiGiang(formData);
-
-      message.success("Thêm bài giảng thành công");
-
-      // thêm vào table
-      const newLesson = {
-        key: Date.now(),
-        title: values.title,
-        video: "Video đã upload",
-        duration: "-"
-      };
-
-      setData(prev => [newLesson, ...prev]);
-
+      if (res) {
+        getData();
+        message.success("Thêm bài giảng thành công");
+      }
+      setFullPageLoading(false)
       setOpenModal(false);
 
     } catch (error) {
-
+      setFullPageLoading(false)
       message.error("Upload thất bại");
 
     } finally {
-      setLoading(false);
+      setFullPageLoading(false)
     }
 
   };
@@ -138,15 +129,13 @@ const LessonList = () => {
 
       <Table
         columns={columns}
+        pagination={false}
         rowKey="_id"
         dataSource={data}
-        pagination={{ pageSize: 10 }}
-        loading={loading}
       />
 
       <AddLessonModal
         open={openModal}
-        loading={loading}
         onCancel={() => setOpenModal(false)}
         onSubmit={handleAddLesson}
       />

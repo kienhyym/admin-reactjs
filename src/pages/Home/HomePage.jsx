@@ -12,10 +12,12 @@ import { getAchievements } from "../../util/api";
 
 const HomePage = () => {
   const [data, setData] = useState([])
+  const { setFullPageLoading } = useContext(AuthContext)
 
   const { auth } = useContext(AuthContext);
   useEffect(() => {
     const getData = async () => {
+      setFullPageLoading(true)
       const res = await getAchievements()
       if (res) {
         setData(res.data)
@@ -23,6 +25,7 @@ const HomePage = () => {
       else {
         message.error("lỗi nhận dữ liệu")
       }
+      setFullPageLoading(false)
     }
     getData()
   }, [])

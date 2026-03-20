@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Card, Upload, Button, Table, message, Space } from "antd";
 import { EyeOutlined, UploadOutlined } from "@ant-design/icons";
 import { useNavigate, useParams } from "react-router-dom";
 import { createQuestionWithOptions, getQuestionsByLecture, importQuizz } from "../../util/api";
 import AddQuestionModal from "./AddQuestionModal";
+import { AuthContext } from "../../component/context/authContext";
 
 const QuizDetail = () => {
   const navigate = useNavigate()
@@ -11,33 +12,42 @@ const QuizDetail = () => {
   const id = lessonId
   const [questions, setQuestions] = useState([]);
   const [openModal, setOpenModal] = useState(false);
+  const { setFullPageLoading } = useContext(AuthContext)
 
   const handleAddQuestion = async (values) => {
     try {
+      setFullPageLoading(true)
       const res = await createQuestionWithOptions(id, values)
-      console.log('res======', res)
       if (res?.status === 'ok') {
-        setOpenModal(false)
         message.success("Tạo thành công")
-        window.location.reload()
+        getData()
+        setOpenModal(false)
       } else {
         message.error(res.message)
-
       }
+      setFullPageLoading(false)
     } catch (error) {
       message.error(error.message)
     }
   };
-  useEffect(() => {
-    const getData = async () => {
+  const getData = async () => {
+    try {
+      setFullPageLoading(true)
       const res = await getQuestionsByLecture(id)
       if (res) {
         setQuestions(res.questions)
       }
       else {
-        console.log("res lectures error:");
+        message.error(res?.message)
       }
+      setFullPageLoading(false)
+    } catch (error) {
+      setFullPageLoading(false)
+      message.error(error?.message)
     }
+
+  }
+  useEffect(() => {
     getData()
   }, [])
 
@@ -109,6 +119,7 @@ const QuizDetail = () => {
         <Table
           columns={columns}
           dataSource={questions}
+          pagination={false}
           rowKey={(record, index) => {
             return record._id
           }}

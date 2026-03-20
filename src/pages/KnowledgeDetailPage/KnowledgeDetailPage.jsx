@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./KnowledgeDetailPage.css";
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
@@ -7,76 +7,65 @@ import { Card, Form, Input, Upload, Button, List, Space, message, Spin, Image } 
 import {
     UploadOutlined,
 } from "@ant-design/icons";
+import { AuthContext } from "../../component/context/authContext";
 const KnowledgeDetailPage = () => {
     const { id } = useParams();
     const navigate = useNavigate();
     const [knowledge, setKnowledge] = useState([])
     const [form] = Form.useForm();
-    const [deletedVideos, setDeletedVideos] = useState([]);
-    const [loading, setloading] = useState(false)
-    const [loading2, setloading2] = useState(false)
     const [thumbnail, setThumbnail] = useState([]);
+    const { setFullPageLoading } = useContext(AuthContext)
 
-    const handleDeleteVideo = (video) => {
-        const newDeletedVideos = [...deletedVideos, video._id]
-        setDeletedVideos(newDeletedVideos);
-        setKnowledge(prev => ({
-            ...prev,
-            videos: prev.videos?.filter(v => v !== video)
-        }));
-    };
     const onDelete = async () => {
-        setloading2(true)
+        setFullPageLoading(true)
         try {
             await deleteLKnowledge(id);
-            setloading(false)
+            setFullPageLoading(false)
             navigate(-1)
             message.success("Xoá nội dung mở rộng thành công");
         } catch (error) {
-            setloading2(false)
+            setFullPageLoading(false)
             message.error("Xoá thất bại");
         }
 
 
     }
     const handleUpdate = async (values) => {
-        setloading(true)
+        setFullPageLoading(true)
         try {
-
             const formData = new FormData();
-
             formData.append("title", values.title);
             formData.append("link", values.link);
-            console.log('thumbnail',thumbnail)
             if (thumbnail.length > 0) {
                 formData.append("image", thumbnail[0].originFileObj);
             }
 
             await updateKnowledge(id, formData);
-            setloading(false)
+            setFullPageLoading(false)
             message.success("Cập nhật bài giảng thành công");
-            window.location.reload();
+            getData()
 
         } catch (error) {
             console.log("error", error)
-            setloading(false)
+            setFullPageLoading(false)
             message.error("Cập nhật thất bại");
 
         }
 
     };
-
-    useEffect(() => {
-        const festAccount = async () => {
-            const res = await getKnowledgeDetail(id)
-            if (res) {
-                setKnowledge(res.data)
-            }
-            else {
-                console.log("res lectures error:");
-            }
+    const getData = async () => {
+        setFullPageLoading(true)
+        const res = await getKnowledgeDetail(id)
+        if (res) {
+            setKnowledge(res.data)
         }
-        festAccount()
+        else {
+            console.log("res lectures error:");
+        }
+        setFullPageLoading(false)
+    }
+    useEffect(() => {
+        getData()
     }, [])
 
     useEffect(() => {
@@ -136,22 +125,20 @@ const KnowledgeDetailPage = () => {
                         </Button>
                     </Upload>
                 </Form.Item>
-                {
-                    loading ? <Spin /> : <Button
-                        type="primary"
-                        htmlType="submit"
-                    >
-                        Cập nhật
-                    </Button>
-                }
-                {
-                    loading2 ? <Spin /> : <Button
-                        type="dashed"
-                        onClick={onDelete}
-                    >
-                        Xoá nội dung
-                    </Button>
-                }
+                <Button
+                    type="primary"
+                    htmlType="submit"
+                >
+                    Cập nhật
+                </Button>
+
+                <Button
+                    type="dashed"
+                    onClick={onDelete}
+                >
+                    Xoá nội dung
+                </Button>
+
 
             </Form>
 

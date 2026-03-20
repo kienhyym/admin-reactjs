@@ -7,6 +7,7 @@ export const AuthContext = createContext({
 
     },
     loading: true,
+    isFullPageLoading: false
 
 });
 
@@ -17,11 +18,13 @@ export const AuthWrapper = (props) => {
             name: "",
             email: ""
         },
-         loading: true,
+        loading: true,
+        isFullPageLoading: false
     });
     const [loading, setLoading] = useState(true);
+    const [isFullPageLoading, setFullPageLoading] = useState(true);
 
-    return (<AuthContext.Provider value={{ auth, setAtuh, loading, setLoading }}>
+    return (<AuthContext.Provider value={{ auth, setAtuh, loading, setLoading, isFullPageLoading, setFullPageLoading }}>
         {props.children}
     </AuthContext.Provider>
     )

@@ -1,48 +1,36 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./ExtendDetailPage.css";
 import { useParams, useNavigate } from "react-router-dom";
-import lessons from "../../data/LessonListdata";
 import { useEffect } from "react";
-import { deleteLExtend, getExtendDetail, updateBaiGiang, updateExtend } from "../../util/api";
-import { Card, Form, Input, Upload, Button, List, Space, message, Spin, Image } from "antd";
+import { deleteLExtend, getExtendDetail, updateExtend } from "../../util/api";
+import { Card, Form, Input, Upload, Button, List, Space, message, } from "antd";
 import {
     UploadOutlined,
 } from "@ant-design/icons";
+import { AuthContext } from "../../component/context/authContext";
 const ExtendDetailPage = () => {
     const { id } = useParams();
     const navigate = useNavigate();
     const [extend, setExtend] = useState([])
     const [form] = Form.useForm();
-    const [deletedVideos, setDeletedVideos] = useState([]);
-    const [newVideos, setNewVideos] = useState([]);
-    const [loading, setloading] = useState(false)
-    const [loading2, setloading2] = useState(false)
-    const [thumbnail, setThumbnail] = useState([]);
+    const { setFullPageLoading } = useContext(AuthContext)
 
-    const handleDeleteVideo = (video) => {
-        const newDeletedVideos = [...deletedVideos, video._id]
-        setDeletedVideos(newDeletedVideos);
-        setExtend(prev => ({
-            ...prev,
-            videos: prev.videos?.filter(v => v !== video)
-        }));
-    };
     const onDelete = async () => {
-        setloading2(true)
+        setFullPageLoading(true)
         try {
             await deleteLExtend(id);
-            setloading(false)
+            setFullPageLoading(false)
             navigate(-1)
             message.success("Xoá nội dung mở rộng thành công");
         } catch (error) {
-            setloading2(false)
+            setFullPageLoading(false)
             message.error("Xoá thất bại");
         }
 
 
     }
     const handleUpdate = async (values) => {
-        setloading(true)
+        setFullPageLoading(true)
         try {
 
             const formData = new FormData();
@@ -56,21 +44,21 @@ const ExtendDetailPage = () => {
 
 
             await updateExtend(id, formData);
-            setloading(false)
+            setFullPageLoading(false)
             message.success("Cập nhật bài giảng thành công");
             // window.location.reload();
 
         } catch (error) {
             console.log("error", error)
-            setloading(false)
+            setFullPageLoading(false)
             message.error("Cập nhật thất bại");
-
         }
 
     };
 
     useEffect(() => {
         const festAccount = async () => {
+            setFullPageLoading(true)
             const res = await getExtendDetail(id)
             if (res) {
                 setExtend(res.data)
@@ -78,6 +66,8 @@ const ExtendDetailPage = () => {
             else {
                 console.log("res lectures error:");
             }
+            setFullPageLoading(false)
+
         }
         festAccount()
     }, [])
@@ -95,7 +85,9 @@ const ExtendDetailPage = () => {
         return <h2 style={{ padding: 40 }}>Không tìm thấy bài học</h2>;
     }
 
+
     return (
+
         <Card title="Chỉnh sửa nội dung mở rộng">
 
             <Form
@@ -145,7 +137,6 @@ const ExtendDetailPage = () => {
                     name="videos"
                     valuePropName="fileList"
                     getValueFromEvent={(e) => {
-                        setNewVideos(e?.fileList || []);
                         return e?.fileList;
                     }}
                 >
@@ -158,22 +149,18 @@ const ExtendDetailPage = () => {
                         </Button>
                     </Upload>
                 </Form.Item>
-                {
-                    loading ? <Spin /> : <Button
-                        type="primary"
-                        htmlType="submit"
-                    >
-                        Cập nhật
-                    </Button>
-                }
-                {
-                    loading2 ? <Spin /> : <Button
-                        type="dashed"
-                        onClick={onDelete}
-                    >
-                        Xoá nội dung
-                    </Button>
-                }
+                <Button
+                    type="primary"
+                    htmlType="submit"
+                >
+                    Cập nhật
+                </Button>
+                <Button
+                    type="dashed"
+                    onClick={onDelete}
+                >
+                    Xoá nội dung
+                </Button>
 
             </Form>
 

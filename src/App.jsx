@@ -3,19 +3,19 @@ import Header from "./component/layout/header"
 import axios from "./util/axios.custiomzie"
 import { useContext, useEffect } from "react"
 import { AuthContext } from "./component/context/authContext"
-import { use } from "react"
-import { getAccountApi, homeApi } from "./util/api"
 import LoginPage from "./pages/Login/LoginPage"
 import WelcomePage from "./pages/WelcomePage/WelcomePage"
+import FullPageLoading from "./component/loadingPage/FullPageLoading"
 
 
 function App() {
-  const { auth, setAtuh, setLoading } = useContext(AuthContext)
+  const { auth, setAtuh, setLoading, isFullPageLoading, setFullPageLoading } = useContext(AuthContext)
   const navigate = useNavigate();
 
   useEffect(() => {
     setLoading(true);
     const festAccount = async () => {
+      setFullPageLoading(true)
       const res = await axios.get(`/v1/api/account`)
       if (res && res?.email) {
         setAtuh({
@@ -27,20 +27,23 @@ function App() {
         })
         setLoading(false);
       }
-      else{
+      else {
         console.log("res account error:");
         setLoading(false);
         navigate("/login");
       }
+      setFullPageLoading(false)
+
     }
     festAccount()
   }, [])
-
-  if(auth.loading) {
-    return <WelcomePage/>
+  
+  if (auth.loading) {
+    return <WelcomePage />
   }
+
   return (
-  <div className="app-layout">
+    <div className="app-layout">
 
       {!auth.isAuthenticated ? (
         <LoginPage />
@@ -53,7 +56,7 @@ function App() {
           </div>
         </>
       )}
-
+      {isFullPageLoading && <FullPageLoading title={""} style={{}} />}
     </div>
   )
 }

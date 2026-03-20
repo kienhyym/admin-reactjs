@@ -1,19 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Table, Button, Space, Input, message } from "antd";
 import { PlusOutlined, EditOutlined, DeleteOutlined, EyeOutlined } from "@ant-design/icons";
 import "./ExtendPage.css";
 import AddExtendModal from "./ExtendPageModal";
 import { getExtend, uploadExtend } from "../../util/api";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../component/context/authContext";
 
 const ExtendPage = () => {
   const [openModal, setOpenModal] = useState(false);
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState([])
   const navigate = useNavigate()
+  const { setFullPageLoading } = useContext(AuthContext)
 
-  useEffect(() => {
-    const getData = async () => {
+   const getData = async () => {
+      setFullPageLoading(true)
       const res = await getExtend()
       if (res) {
         setData(res.data)
@@ -21,7 +23,9 @@ const ExtendPage = () => {
       else {
         console.log("res lectures error:");
       }
+      setFullPageLoading(false)
     }
+  useEffect(() => {
     getData()
   }, [])
 
@@ -68,7 +72,7 @@ const ExtendPage = () => {
 
     try {
 
-      setLoading(true);
+      setFullPageLoading(true)
       const formData = new FormData();
       formData.append("title", values.title);
       formData.append("link", values.link);
@@ -78,23 +82,18 @@ const ExtendPage = () => {
       const res = await uploadExtend(formData);
       if (res) {
         message.success("Thêm bài giảng thành công");
+        getData()
       }
-
-      // thêm vào table
-      const newLesson = {
-        key: Date.now(),
-        title: values.title,
-        link: "Video đã upload",
-        duration: "-"
-      };
-
-      setData(prev => [newLesson, ...prev]);
       setOpenModal(false);
+      setFullPageLoading(false)
+
     } catch (error) {
       console.log('error', error)
       message.error("Upload thất bại");
+      setFullPageLoading(false)
     } finally {
-      setLoading(false);
+      setFullPageLoading(false)
+
     }
 
   };
@@ -128,7 +127,6 @@ const ExtendPage = () => {
 
       <AddExtendModal
         open={openModal}
-        loading={loading}
         onCancel={() => setOpenModal(false)}
         onSubmit={handleAddLesson}
       />

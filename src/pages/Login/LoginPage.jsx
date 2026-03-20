@@ -8,9 +8,10 @@ import { loginApi } from "../../util/api";
 const LoginPage = () => {
 
    const navigate = useNavigate();
-  const { setAtuh } = useContext(AuthContext);
+  const { setAtuh ,setFullPageLoading} = useContext(AuthContext);
 
   const onFinish = async (values) => {
+    setFullPageLoading(true)
     const { email, password } = values;
 
     const res = await loginApi(email, password);
@@ -29,7 +30,7 @@ const LoginPage = () => {
           email: res?.user?.email,
         },
       });
-
+       setFullPageLoading(false)
       navigate("/");
     } else {
       notification.error({

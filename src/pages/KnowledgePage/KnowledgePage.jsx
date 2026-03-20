@@ -1,27 +1,30 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Table, Button, Space, Input, message } from "antd";
 import { PlusOutlined, EditOutlined, DeleteOutlined, EyeOutlined } from "@ant-design/icons";
 import "./KnowledgePage.css";
 import AddKnowledgeModal from "./KnowledgePageModal";
 import { getKnowledge, uploadKnowledge } from "../../util/api";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../component/context/authContext";
 
 const KnowledgePage = () => {
   const [openModal, setOpenModal] = useState(false);
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState([])
   const navigate = useNavigate()
-
-  useEffect(() => {
-    const getData = async () => {
-      const res = await getKnowledge()
-      if (res) {
-        setData(res.data)
-      }
-      else {
-        console.log("res lectures error:");
-      }
+  const { setFullPageLoading } = useContext(AuthContext)
+  const getData = async () => {
+    setFullPageLoading(true)
+    const res = await getKnowledge()
+    if (res) {
+      setData(res.data)
     }
+    else {
+      console.log("res lectures error:");
+    }
+    setFullPageLoading(false)
+  }
+  useEffect(() => {
     getData()
   }, [])
 
@@ -68,34 +71,25 @@ const KnowledgePage = () => {
 
     try {
 
-      setLoading(true);
+      setFullPageLoading(true);
       const formData = new FormData();
       formData.append("title", values.title);
       formData.append("link", values.link);
       formData.append("image", values.image[0].originFileObj);
-
-
-
       const res = await uploadKnowledge(formData);
       if (res) {
         message.success("Thêm bài giảng thành công");
+        getData()
       }
-
-      // thêm vào table
-      const newLesson = {
-        key: Date.now(),
-        title: values.title,
-        link: "Video đã upload",
-        duration: "-"
-      };
-
-      setData(prev => [newLesson, ...prev]);
+      setFullPageLoading(false)
       setOpenModal(false);
     } catch (error) {
-      console.log('error', error)
       message.error("Upload thất bại");
+      setFullPageLoading(false)
+
     } finally {
-      setLoading(false);
+      setFullPageLoading(false)
+
     }
 
   };

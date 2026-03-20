@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./LessonDetail.css";
 import { useParams, useNavigate } from "react-router-dom";
 import { Modal } from "antd"; import { useEffect } from "react";
@@ -8,6 +8,7 @@ import {
     UploadOutlined,
     DeleteOutlined
 } from "@ant-design/icons";
+import { AuthContext } from "../../component/context/authContext";
 const LessonDetail = () => {
     const { id } = useParams();
     const navigate = useNavigate();
@@ -15,13 +16,25 @@ const LessonDetail = () => {
     const [form] = Form.useForm();
     const [deletedVideos, setDeletedVideos] = useState([]);
     const [newVideos, setNewVideos] = useState([]);
-    const [loading, setloading] = useState(false)
-    const [loading2, setloading2] = useState(false)
     const [thumbnail, setThumbnail] = useState([]);
 
     const [editVideoModal, setEditVideoModal] = useState(false);
     const [editingVideo, setEditingVideo] = useState(null);
     const [videoTitle, setVideoTitle] = useState("");
+    const { setFullPageLoading } = useContext(AuthContext)
+
+
+    const getData = async () => {
+        setFullPageLoading(true)
+        const res = await getLectureDetailApi(id)
+        if (res) {
+            setLesson(res.data)
+        }
+        else {
+            console.log("res lectures error:");
+        }
+        setFullPageLoading(false)
+    }
 
     const openEditVideo = (video) => {
         setEditingVideo(video);
@@ -32,33 +45,26 @@ const LessonDetail = () => {
     const handleUpdateVideoTitle = async () => {
 
         try {
+            setFullPageLoading(true)
             const res = await updateTitleVideo(editingVideo._id, { title: videoTitle })
             if (res.data) {
-                setLesson(prev => ({
-                    ...prev,
-                    videos: prev.videos.map(v =>
-                        v._id === editingVideo._id
-                            ? { ...v, displayName: videoTitle }
-                            : v
-                    )
-                }));
+                getData()
                 setEditVideoModal(false);
                 message.success("Cập nhật tiêu đề video thành công");
             } else {
                 setEditVideoModal(false);
                 message.error(res.message);
             }
+            setFullPageLoading(false)
         } catch (error) {
             setEditVideoModal(false);
             message.error(error.message);
-
+            setFullPageLoading(false)
         }
 
     };
 
 
-
-    console.log('lesson', lesson)
     const handleDeleteVideo = (video) => {
         const newDeletedVideos = [...deletedVideos, video._id]
         setDeletedVideos(newDeletedVideos);
@@ -68,21 +74,21 @@ const LessonDetail = () => {
         }));
     };
     const onDelete = async () => {
-        setloading2(true)
+        setFullPageLoading(true)
         try {
             await deleteLectureDetailApi(id);
-            setloading(false)
+            setFullPageLoading(false)
             navigate(-1)
             message.success("Cập nhật bài giảng thành công");
         } catch (error) {
-            setloading2(false)
+            setFullPageLoading(false)
             message.error("Cập nhật thất bại");
         }
 
 
     }
     const handleUpdate = async (values) => {
-        setloading(true)
+        setFullPageLoading(true)
         try {
             const formData = new FormData();
 
@@ -101,13 +107,12 @@ const LessonDetail = () => {
             });
 
             await updateBaiGiang(id, formData);
-            setloading(false)
-
+            setFullPageLoading(false)
             message.success("Cập nhật bài giảng thành công");
-            window.location.reload();
+            getData()
 
         } catch (error) {
-            setloading(false)
+            setFullPageLoading(false)
             message.error("Cập nhật thất bại");
 
         }
@@ -115,16 +120,7 @@ const LessonDetail = () => {
     };
 
     useEffect(() => {
-        const festAccount = async () => {
-            const res = await getLectureDetailApi(id)
-            if (res) {
-                setLesson(res.data)
-            }
-            else {
-                console.log("res lectures error:");
-            }
-        }
-        festAccount()
+        getData()
     }, [])
 
     useEffect(() => {
@@ -240,22 +236,20 @@ const LessonDetail = () => {
                         </Button>
                     </Upload>
                 </Form.Item>
-                {
-                    loading ? <Spin /> : <Button
+                 <Button
                         type="primary"
                         htmlType="submit"
                     >
                         Cập nhật
                     </Button>
-                }
-                {
-                    loading2 ? <Spin /> : <Button
+                
+                <Button
                         type="dashed"
                         onClick={onDelete}
                     >
                         Xoá bài giảng
                     </Button>
-                }
+                
 
             </Form>
             <Modal

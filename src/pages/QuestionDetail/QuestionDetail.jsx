@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
     Form,
     Input,
@@ -18,6 +18,7 @@ import {
 import { deleteQuestionById, getQuestionDetailById, updateQuestionWithOptions } from "../../util/api";
 import { useNavigate, useParams } from "react-router-dom";
 import "./QuestionDetailPage.css";
+import { AuthContext } from "../../component/context/authContext";
 
 const { TextArea } = Input;
 
@@ -25,18 +26,17 @@ const QuestionDetailPage = () => {
     const navigate = useNavigate()
     const { questionId } = useParams();
     const [form] = Form.useForm();
+    const { setFullPageLoading } = useContext(AuthContext)
 
     const [type, setType] = useState("single");
     const [correctAnswer, setCorrectAnswer] = useState(null);
 
     /* ---------------- GET DATA ---------------- */
 
-    useEffect(() => {
-
-        const fetchQuestion = async () => {
-
+     const fetchQuestion = async () => {
+            setFullPageLoading(true)
             const res = await getQuestionDetailById(questionId);
-
+            setFullPageLoading(false)
             if (!res) return;
 
             const question = res.question;
@@ -91,30 +91,31 @@ const QuestionDetailPage = () => {
 
         };
 
+    useEffect(() => {
         fetchQuestion();
-
     }, [questionId]);
 
 
     const handleUpdateQuestion = async (values) => {
         try {
             try {
+                setFullPageLoading(true)
                 const res = await updateQuestionWithOptions(questionId, values)
                 if (res.status === 'ok') {
                     message.success("Cập nhật thành công")
-                    setTimeout(() => {
-                        window.location.reload();
-                    }, 2000);
+                    fetchQuestion();
 
                 } else {
                     message.error(res.message)
-
                 }
+                setFullPageLoading(false)
             } catch (error) {
                 message.error(error.message)
+                setFullPageLoading(false)
             }
         } catch (error) {
             message.error(error.message)
+            setFullPageLoading(false)
         }
     };
 
@@ -122,7 +123,6 @@ const QuestionDetailPage = () => {
     /* ---------------- SUBMIT ---------------- */
 
     const handleSubmit = async () => {
-
         await form.validateFields();
 
         const values = form.getFieldsValue(true);
@@ -188,12 +188,15 @@ const QuestionDetailPage = () => {
     };
     const handleDelete = async () => {
         try {
+            setFullPageLoading(true)
             const res = await deleteQuestionById(questionId);
             if (res.status) {
                 navigate(-1)
             }
+            setFullPageLoading(false)
         } catch (error) {
             console.log(error)
+            setFullPageLoading(false)
         }
 
     }

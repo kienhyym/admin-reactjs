@@ -17,3 +17,19 @@
 .lesson-header h2 {
   font-weight: 600;
 }
+
+.title-chapper {
+  margin-bottom: 20px;
+  margin-top: 50px;
+  display: flex
+}
+
+.title-chapper-open {
+  color: green;
+  margin-left: 20px;
+}
+
+.title-chapper-close {
+  color: red;
+  margin-left: 20px;
+}

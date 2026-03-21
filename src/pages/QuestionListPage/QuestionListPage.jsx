@@ -1,11 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./QuestionListPage.css";
 import { getLecturesApi } from "../../util/api";
-import QuestionListPageCard from "./QuestionListPageCard/QuestionListPageCard";
 import { AuthContext } from "../../component/context/authContext";
-import { message } from "antd";
+import { Button, message, Space, Table } from "antd";
+import { EyeOutlined } from "@ant-design/icons";
+import { useNavigate } from "react-router-dom";
 
 const QuestionListPage = () => {
+  const navigate = useNavigate();
   const { setFullPageLoading } = useContext(AuthContext)
   const [data, setData] = useState([])
   const getData = async () => {
@@ -28,13 +30,39 @@ const QuestionListPage = () => {
   useEffect(() => {
     getData()
   }, [])
-  return (
-    <div className="question-container">
-      <h1 className="page-title">🧪 Câu hỏi ôn tập theo bài</h1>
-      <div className="question-grid">
-        {data.map((lesson) => (<QuestionListPageCard data={lesson} key={lesson._id} />))}
-      </div>
+  const columns = [
+    {
+      title: "STT",
+      render: (_, __, index) => index + 1,
+      width: 60
+    },
+    {
+      title: "Bài giảng",
+      dataIndex: "title"
+    },
+    {
+      title: "hành động",
+      render: (item) => (
+        <Space>
+          <Button type="primary" icon={<EyeOutlined />} onClick={() => navigate(item._id)} />
+        </Space>
+      )
+    }
+  ];
 
+  return (
+    <div className="question-list-page">
+      <div className="question-list-header">
+        <h2>Câu hỏi ôn tập theo bài</h2>
+      </div>
+      <Table
+        columns={columns}
+        dataSource={data}
+        pagination={false}
+        rowKey={(lesson) => {
+          return lesson._id
+        }}
+      />
     </div>
   );
 };

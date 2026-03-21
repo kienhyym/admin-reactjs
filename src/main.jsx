@@ -18,7 +18,8 @@ import ExtendPage from './pages/ExtendPage/ExtendPage.jsx'
 import WelcomePage from './pages/WelcomePage/WelcomePage.jsx'
 import ExtendDetailPage from './pages/ExtendDetailPage/ExtendDetailPage.jsx'
 import QuestionDetailPage from './pages/QuestionDetail/QuestionDetail.jsx'
-
+import ChapterPage from './pages/ChapterPage/ChapterPage.jsx'
+import ChapterDetailPage from './pages/ChapterDetailPage/ChapterDetailPage.jsx'
 
 const router = createBrowserRouter([
   {
@@ -54,7 +55,7 @@ const router = createBrowserRouter([
         path: "knowledge",
         element: <KnowledgePage />
       },
-   {
+      {
         path: 'knowledge/:id',   // ✅ dynamic route
         element: <KnowledgeDetailPage />
       },
@@ -62,7 +63,7 @@ const router = createBrowserRouter([
         path: "extend",
         element: <ExtendPage />
       },
-         {
+      {
         path: 'extend/:id',   // ✅ dynamic route
         element: <ExtendDetailPage />
       },
@@ -70,7 +71,14 @@ const router = createBrowserRouter([
         path: 'quiz/:id/question/:questionId',   // ✅ dynamic route
         element: <QuestionDetailPage />
       },
-
+      {
+        path: "chapter",
+        element: <ChapterPage />
+      },
+       {
+        path: "chapter/:id",
+        element: <ChapterDetailPage />
+      },
     ]
   },
 

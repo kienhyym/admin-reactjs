@@ -110,10 +110,13 @@ const LessonList = () => {
 
         <div className="lesson-actions">
 
-          <Input.Search
-            placeholder="Tìm bài giảng..."
-            style={{ width: 250 }}
-          />
+          <Button
+            type="primary"
+            icon={<PlusOutlined />}
+            onClick={() => setOpenModal(true)}
+          >
+            Thêm chương học
+          </Button>
 
           <Button
             type="primary"
@@ -126,13 +129,28 @@ const LessonList = () => {
         </div>
 
       </div>
+      {data.map((item) => {
+        return (
+          <>
+            <div className="title-chapper"  >
+              <h3 >{item.title} {item?.name}</h3>
+              {
+                item.status ?
+                  <h3 className="title-chapper-open" >(Đang hiển thị)</h3>
+                  :
+                  <h3 className="title-chapper-close" >(Đang ẩn)</h3>
+              }
+            </div>
 
-      <Table
-        columns={columns}
-        pagination={false}
-        rowKey="_id"
-        dataSource={data}
-      />
+            <Table
+              columns={columns}
+              pagination={false}
+              rowKey="_id"
+              dataSource={item.lectures}
+            />
+          </>)
+      })}
+
 
       <AddLessonModal
         open={openModal}

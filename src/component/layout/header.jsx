@@ -26,10 +26,22 @@ const Header = () => {
 
     const items = [
         {
-            label: <Link to="/lessons">Quản lý bài giảng</Link>,
-            key: "/lessons",
-            icon: <PlayCircleOutlined />,
+            label: <p style={{ color: "#fff" }}>Quản lý bài giảng</p>,
+            icon: <PlayCircleOutlined style={{ color: "#fff",marginLeft:"6px" }} />,
+            children: [
+                {
+                    label: <Link to="/lessons">Quản lý bài giảng</Link>,
+                    key: "/lessons",
+                    icon: <PlayCircleOutlined />,
+                },
+                {
+                    label: <Link to="/chapter">Quản lý chương học</Link>,
+                    key: "/chapter",
+                    icon: <PlayCircleOutlined />,
+                },
+            ],
         },
+
         {
             label: <Link to="/quiz">Quản lý câu hỏi</Link>,
             key: "/quiz",

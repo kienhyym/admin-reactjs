@@ -184,6 +184,31 @@ const getAchievements = () => {
     return axios.get(URL_API);
 }
 
+
+const createChapter = (value) => {
+    const URL_API = `/v1/api/chapter`;
+    return axios.post(URL_API, value);
+}
+const updateChapter = (id, value) => {
+    const URL_API = `/v1/api/chapter/` + id;
+    return axios.put(URL_API, value);
+}
+
+
+const getChapter = (id) => {
+    const URL_API = `/v1/api/chapter/${id}`;
+    return axios.get(URL_API);
+}
+const deleteChapter = (id) => {
+    const URL_API = `/v1/api/chapter/${id}`;
+    return axios.delete(URL_API);
+}
+
+const getChapters = () => {
+    const URL_API = `/v1/api/chapters`;
+    return axios.get(URL_API);
+}
+
 export {
     createrUserApi,
     loginApi, getUsersApi,
@@ -196,6 +221,7 @@ export {
     uploadExtend, getExtend, getExtendDetail, deleteLExtend, updateExtend,
     uploadKnowledge, updateKnowledge, getKnowledge, getKnowledgeDetail, deleteLKnowledge,
     importQuizz, getQuestionsByLecture,
-    updateTitleVideo, createQuestionWithOptions,getQuestionDetailById,deleteQuestionById,updateQuestionWithOptions,
-    getAchievements
+    updateTitleVideo, createQuestionWithOptions, getQuestionDetailById, deleteQuestionById, updateQuestionWithOptions,
+    getAchievements,
+    createChapter, updateChapter, getChapter, deleteChapter, getChapters
 }

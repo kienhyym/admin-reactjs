@@ -41,7 +41,7 @@ const AddExtendModal = ({ open, onCancel, onSubmit }) => {
                     <Input placeholder="Nhập url" />
                 </Form.Item>
 
-                <Form.Item
+                {/* <Form.Item
                     label="Upload video"
                     name="videos"
                     valuePropName="fileList"
@@ -52,7 +52,7 @@ const AddExtendModal = ({ open, onCancel, onSubmit }) => {
                             Chọn video
                         </Button>
                     </Upload>
-                </Form.Item>
+                </Form.Item> */}
 
             </Form>
 

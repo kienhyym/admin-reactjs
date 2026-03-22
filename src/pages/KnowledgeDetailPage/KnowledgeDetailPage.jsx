@@ -35,7 +35,6 @@ const KnowledgeDetailPage = () => {
         try {
             const formData = new FormData();
             formData.append("title", values.title);
-            formData.append("link", values.link);
             if (thumbnail.length > 0) {
                 formData.append("image", thumbnail[0].originFileObj);
             }
@@ -72,7 +71,6 @@ const KnowledgeDetailPage = () => {
         if (knowledge) {
             form.setFieldsValue({
                 title: knowledge?.title,
-                link: knowledge?.link
             });
         }
     }, [knowledge]);
@@ -96,13 +94,6 @@ const KnowledgeDetailPage = () => {
                     rules={[{ required: true }]}
                 >
                     <Input placeholder="Nhập tên tiêu đề" />
-                </Form.Item>
-                <Form.Item
-                    label="đường dẫn thực hành"
-                    name="link"
-                    rules={[{ required: true }]}
-                >
-                    <Input placeholder="Nhập url" />
                 </Form.Item>
                 <Image src={knowledge.imageUrl} height={200} />
                 <Form.Item

@@ -14,17 +14,17 @@ const ExtendPage = () => {
   const navigate = useNavigate()
   const { setFullPageLoading } = useContext(AuthContext)
 
-   const getData = async () => {
-      setFullPageLoading(true)
-      const res = await getExtend()
-      if (res) {
-        setData(res.data)
-      }
-      else {
-        console.log("res lectures error:");
-      }
-      setFullPageLoading(false)
+  const getData = async () => {
+    setFullPageLoading(true)
+    const res = await getExtend()
+    if (res) {
+      setData(res.data)
     }
+    else {
+      console.log("res lectures error:");
+    }
+    setFullPageLoading(false)
+  }
   useEffect(() => {
     getData()
   }, [])
@@ -49,20 +49,12 @@ const ExtendPage = () => {
         </a>
       )
     },
-    // {
-    //   title: "Video",
-    //   dataIndex: "videoUrl",
-    //   render: (video) => (
-    //     <video width="180" controls>
-    //       <source src={video} />
-    //     </video>
-    //   )
-    // },
     {
       title: "Hành động",
+      width: 170,
       render: (item) => (
         <Space>
-          <Button type="primary" icon={<EyeOutlined />} onClick={() => navigate(item._id)} />
+          <Button type="primary" icon={<EyeOutlined />} onClick={() => navigate(item._id)} >Chi tiết</Button>
         </Space>
       )
     }
@@ -76,8 +68,10 @@ const ExtendPage = () => {
       const formData = new FormData();
       formData.append("title", values.title);
       formData.append("link", values.link);
-      const file = values.videos[0];
-      formData.append("videos", file.originFileObj);
+      // const file = values.videos[0];
+      // if (file) {
+      //   formData.append("videos", file.originFileObj);
+      // }
 
       const res = await uploadExtend(formData);
       if (res) {
@@ -106,13 +100,13 @@ const ExtendPage = () => {
 
         <div className="extend-actions">
 
-          <Input.Search
+          {/* <Input.Search
             placeholder="Tìm kiếm..."
             style={{ width: 250 }}
-          />
+          /> */}
 
           <Button type="primary" icon={<PlusOutlined />} onClick={() => setOpenModal(true)}>
-            Thêm Extend
+            Thêm nội dung kiến thức mở rộng
           </Button>
 
         </div>

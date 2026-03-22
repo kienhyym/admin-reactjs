@@ -34,14 +34,6 @@ const AddKnowledgeModal = ({ open, onCancel, onSubmit, loading }) => {
                     <Input placeholder="Nhập tiêu đề nội dung bài giảng" />
                 </Form.Item>
 
-                <Form.Item
-                    label="đường dẫn tài liệu"
-                    name="link"
-                    rules={[{ required: true }]}
-                >
-                    <Input placeholder="Nhập url" />
-                </Form.Item>
-
                <Form.Item
                     label="image"
                     name="image"

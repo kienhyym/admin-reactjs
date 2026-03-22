@@ -49,12 +49,12 @@ const Header = () => {
         //     icon: <QuestionCircleOutlined />,
         // },
         {
-            label: <Link to="/knowledge">Quản lý kiến thức</Link>,
+            label: <Link to="/knowledge">Quản lý kiến thức tổng hợp</Link>,
             key: "/knowledge",
             icon: <BookOutlined />,
         },
         {
-            label: <Link to="/extend">Quản lý mở rộng</Link>,
+            label: <Link to="/extend">Quản lý kiến thức mở rộng</Link>,
             key: "/extend",
             icon: <AppstoreOutlined />,
         },

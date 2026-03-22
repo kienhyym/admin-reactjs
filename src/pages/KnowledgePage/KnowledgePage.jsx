@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Table, Button, Space, Input, message } from "antd";
-import { PlusOutlined, EditOutlined, DeleteOutlined, EyeOutlined } from "@ant-design/icons";
+import { Table, Button, Space, Input, message, Image } from "antd";
+import { PlusOutlined, EyeOutlined } from "@ant-design/icons";
 import "./KnowledgePage.css";
 import AddKnowledgeModal from "./KnowledgePageModal";
 import { getKnowledge, uploadKnowledge } from "../../util/api";
@@ -37,31 +37,21 @@ const KnowledgePage = () => {
     },
     {
       title: "Tiêu đề",
-      dataIndex: "title"
+      dataIndex: "title",
     },
     {
-      title: "Link",
-      dataIndex: "link",
-      render: (link) => (
-        <a href={link} target="_blank" rel="noreferrer">
-          {link}
-        </a>
-      )
+      title: "hình ảnh",
+      dataIndex: "imageUrl",
+      width: 170,
+      render: (data) => <Image src={data} height={50} />
     },
-    // {
-    //   title: "Video",
-    //   dataIndex: "videoUrl",
-    //   render: (video) => (
-    //     <video width="180" controls>
-    //       <source src={video} />
-    //     </video>
-    //   )
-    // },
     {
       title: "Hành động",
+      width: 170,
       render: (item) => (
         <Space>
-          <Button type="primary" icon={<EyeOutlined />} onClick={() => navigate(item._id)} />
+          <Button type="primary" icon={<EyeOutlined />} onClick={() => navigate(item._id)}>
+            Chi tiết</Button>
         </Space>
       )
     }
@@ -74,7 +64,6 @@ const KnowledgePage = () => {
       setFullPageLoading(true);
       const formData = new FormData();
       formData.append("title", values.title);
-      formData.append("link", values.link);
       formData.append("image", values.image[0].originFileObj);
       const res = await uploadKnowledge(formData);
       if (res) {
@@ -101,14 +90,14 @@ const KnowledgePage = () => {
         <h2>Quản lý nội dung tổng hợp kiến thức</h2>
 
         <div className="knowledge-actions">
-
+{/* 
           <Input.Search
             placeholder="Tìm kiếm..."
             style={{ width: 250 }}
-          />
+          /> */}
 
           <Button type="primary" icon={<PlusOutlined />} onClick={() => setOpenModal(true)}>
-            Thêm Knowledge
+            Thêm nội dung kiến thức tổng hợp
           </Button>
 
         </div>

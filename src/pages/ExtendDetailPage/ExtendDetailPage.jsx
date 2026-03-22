@@ -110,7 +110,7 @@ const ExtendDetailPage = () => {
                 >
                     <Input placeholder="Nhập url" />
                 </Form.Item>
-                <Form.Item label="video">
+                {/* <Form.Item label="video">
                     {
                         extend?.videoUrl ? <List
                             bordered
@@ -131,8 +131,8 @@ const ExtendDetailPage = () => {
                     }
 
 
-                </Form.Item>
-                <Form.Item
+                </Form.Item> */}
+                {/* <Form.Item
                     label="Upload video mới"
                     name="videos"
                     valuePropName="fileList"
@@ -148,7 +148,7 @@ const ExtendDetailPage = () => {
                             Chọn video
                         </Button>
                     </Upload>
-                </Form.Item>
+                </Form.Item> */}
                 <Button
                     type="primary"
                     htmlType="submit"

@@ -29,24 +29,25 @@ const Header = () => {
             label: <p style={{ color: "#fff" }}>Quản lý bài giảng</p>,
             icon: <PlayCircleOutlined style={{ color: "#fff",marginLeft:"6px" }} />,
             children: [
+                 {
+                    label: <Link to="/chapter">Quản lý chương học</Link>,
+                    key: "/chapter",
+                    icon: <PlayCircleOutlined />,
+                },
                 {
                     label: <Link to="/lessons">Quản lý bài giảng</Link>,
                     key: "/lessons",
                     icon: <PlayCircleOutlined />,
                 },
-                {
-                    label: <Link to="/chapter">Quản lý chương học</Link>,
-                    key: "/chapter",
-                    icon: <PlayCircleOutlined />,
-                },
+               
             ],
         },
 
-        {
-            label: <Link to="/quiz">Quản lý câu hỏi</Link>,
-            key: "/quiz",
-            icon: <QuestionCircleOutlined />,
-        },
+        // {
+        //     label: <Link to="/quiz">Quản lý câu hỏi</Link>,
+        //     key: "/quiz",
+        //     icon: <QuestionCircleOutlined />,
+        // },
         {
             label: <Link to="/knowledge">Quản lý kiến thức</Link>,
             key: "/knowledge",

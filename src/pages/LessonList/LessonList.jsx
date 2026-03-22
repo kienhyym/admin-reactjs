@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Table, Button, Space, Input, message, Image } from "antd";
 import {
+  EditOutlined,
   EyeOutlined,
   PlusOutlined
 } from "@ant-design/icons";
@@ -38,11 +39,12 @@ const LessonList = () => {
     {
       title: "Tên bài giảng",
       dataIndex: "title",
-      key: "title"
+      key: "title",
     },
     {
       title: "Số lượng video",
       dataIndex: "videos",
+      width: 170,
       render: (videos) => (
         <p>
           {videos?.length}
@@ -52,15 +54,32 @@ const LessonList = () => {
     {
       title: "hình ảnh",
       dataIndex: "thumbnail",
+        width: 170,
       render: (data) => (
         <Image src={data} height={50} />
       )
     },
     {
+      title: "Trạng thái",
+           width: 170,
+      render: (item) => (
+        <>
+          {item.status ?
+            <p className="status-open" >Mở</p> :
+            <p className="status-close">Đóng</p>
+          }
+        </>)
+    },
+    {
       title: "Hành động",
+           width: 310,
       render: (item) => (
         <Space>
-          <Button type="primary" icon={<EyeOutlined />} onClick={() => navigate(item._id)} />
+          <Button type="primary" icon={<EyeOutlined />} onClick={() => navigate(item._id)} >
+            Chi tiết</Button>
+          <Button type="primary" icon={<EditOutlined />} onClick={() => navigate("/quiz/" + item._id)} >
+            quản lý câu hỏi
+          </Button>
         </Space>
       )
     }
@@ -72,6 +91,8 @@ const LessonList = () => {
       setFullPageLoading(true)
       const formData = new FormData();
       formData.append("title", values.title);
+      formData.append("status", values.status);
+
       // thumbnail
       if (values.thumbnail?.length > 0) {
         formData.append(
@@ -82,9 +103,9 @@ const LessonList = () => {
       values.videos.forEach(file => {
         formData.append("videos", file.originFileObj);
       });
-
-      const res = await uploadBaiGiang(formData);
+      const res = await uploadBaiGiang(values.chapterId, formData);
       if (res) {
+        console.log("13213", res)
         getData();
         message.success("Thêm bài giảng thành công");
       }
@@ -92,6 +113,7 @@ const LessonList = () => {
       setOpenModal(false);
 
     } catch (error) {
+      console.log('error', error)
       setFullPageLoading(false)
       message.error("Upload thất bại");
 
@@ -109,15 +131,6 @@ const LessonList = () => {
         <h2>Quản lý bài giảng</h2>
 
         <div className="lesson-actions">
-
-          <Button
-            type="primary"
-            icon={<PlusOutlined />}
-            onClick={() => setOpenModal(true)}
-          >
-            Thêm chương học
-          </Button>
-
           <Button
             type="primary"
             icon={<PlusOutlined />}
@@ -156,6 +169,7 @@ const LessonList = () => {
         open={openModal}
         onCancel={() => setOpenModal(false)}
         onSubmit={handleAddLesson}
+        data={data}
       />
 
     </div>

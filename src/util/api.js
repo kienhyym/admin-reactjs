@@ -38,8 +38,8 @@ const getAccountApi = () => {
     return axios.get(URL_API);
 }
 
-const uploadBaiGiang = (value) => {
-    const URL_API = `/v1/api/lecture`;
+const uploadBaiGiang = (id, value) => {
+    const URL_API = `/v1/api/lecture/` + id;
     return axios.post(URL_API, value, {
         headers: {
             "Content-Type": "multipart/form-data"

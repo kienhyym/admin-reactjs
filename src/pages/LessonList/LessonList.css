@@ -33,3 +33,18 @@
   color: red;
   margin-left: 20px;
 }
+.status-open {
+  background-color: green;
+  color: white;
+  text-align: center;
+  width: 100px;
+  border-radius: 10px;
+}
+
+.status-close {
+  background-color: red;
+  color: white;
+  width: 100px;
+  text-align: center;
+  border-radius: 10px;
+}

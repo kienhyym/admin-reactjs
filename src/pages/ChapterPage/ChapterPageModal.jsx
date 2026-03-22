@@ -1,4 +1,4 @@
-import { Modal, Form, Input, Upload, Button } from "antd";
+import { Modal, Form, Input, Upload, Button, Switch } from "antd";
 
 const AddChapterModal = ({ open, onCancel, onSubmit }) => {
 
@@ -35,9 +35,18 @@ const AddChapterModal = ({ open, onCancel, onSubmit }) => {
                 <Form.Item
                     label="Tên chương"
                     name="name"
-                    rules={[{ required: true }]}
                 >
                     <Input placeholder="Nhập tên chương học" />
+                </Form.Item>
+                 <Form.Item
+                    label="Trạng thái hiển thị"
+                    name="status"
+                    valuePropName="checked"
+                >
+                    <Switch
+                        checkedChildren="Hiển thị"
+                        unCheckedChildren="Ẩn"
+                    />
                 </Form.Item>
             </Form>
 

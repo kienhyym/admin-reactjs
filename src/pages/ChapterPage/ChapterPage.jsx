@@ -38,14 +38,16 @@ const ChapterPage = () => {
     },
     {
       title: "Tiêu đề",
-      dataIndex: "title"
+      dataIndex: "title",
+      width: 270
     },
     {
       title: "Tên chương",
-      dataIndex: "name"
+      dataIndex: "name",
     },
     {
       title: "Trạng thái",
+      width: 170,
       render: (item) => (
         <>
           {item.status ?
@@ -56,9 +58,10 @@ const ChapterPage = () => {
     },
     {
       title: "Hành động",
+      width: 170,
       render: (item) => (
         <Space>
-          <Button type="primary" icon={<EyeOutlined />} onClick={() => navigate(item._id)} />
+          <Button type="primary" icon={<EyeOutlined />} onClick={() => navigate(item._id)} >Chi tiết</Button>
         </Space>
       )
     }
@@ -91,11 +94,11 @@ const ChapterPage = () => {
         <h2>Quản lý chương học</h2>
 
         <div className="chapter-actions">
-
+          {/* 
           <Input.Search
             placeholder="Tìm kiếm..."
             style={{ width: 250 }}
-          />
+          /> */}
 
           <Button type="primary" icon={<PlusOutlined />} onClick={() => setOpenModal(true)}>
             Thêm chương học

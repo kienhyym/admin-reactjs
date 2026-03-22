@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import "./LessonDetail.css";
 import { useParams, useNavigate } from "react-router-dom";
-import { Modal } from "antd"; import { useEffect } from "react";
+import { Modal, Switch } from "antd"; import { useEffect } from "react";
 import { deleteLectureDetailApi, getLectureDetailApi, updateBaiGiang, updateTitleVideo } from "../../util/api";
 import { Card, Form, Input, Upload, Button, List, Space, message, Spin, Image } from "antd";
 import {
@@ -93,6 +93,7 @@ const LessonDetail = () => {
             const formData = new FormData();
 
             formData.append("title", values.title);
+            formData.append("status", values.status);
             // thumbnail mới
             if (thumbnail.length > 0) {
                 formData.append("thumbnail", thumbnail[0].originFileObj);
@@ -126,7 +127,8 @@ const LessonDetail = () => {
     useEffect(() => {
         if (lesson) {
             form.setFieldsValue({
-                title: lesson?.lecture?.title
+                title: lesson?.lecture?.title,
+                status: lesson?.lecture?.status
             });
         }
     }, [lesson]);
@@ -162,7 +164,7 @@ const LessonDetail = () => {
                     )}
                 </div>
                 <Form.Item
-                    label="Thumbnail"
+                    label="Hình ảnh"
                     name="thumbnail"
                     valuePropName="fileList"
                     getValueFromEvent={(e) => {
@@ -176,7 +178,7 @@ const LessonDetail = () => {
                         listType="picture"
                     >
                         <Button icon={<UploadOutlined />}>
-                            Upload thumbnail
+                            Upload hình ảnh
                         </Button>
                     </Upload>
                 </Form.Item>
@@ -236,20 +238,30 @@ const LessonDetail = () => {
                         </Button>
                     </Upload>
                 </Form.Item>
-                 <Button
-                        type="primary"
-                        htmlType="submit"
-                    >
-                        Cập nhật
-                    </Button>
-                
+                <Form.Item
+                    label="Trạng thái hiển thị"
+                    name="status"
+                    valuePropName="checked"
+                >
+                    <Switch
+                        checkedChildren="Hiển thị"
+                        unCheckedChildren="Ẩn"
+                    />
+                </Form.Item>
                 <Button
-                        type="dashed"
-                        onClick={onDelete}
-                    >
-                        Xoá bài giảng
-                    </Button>
-                
+                    type="primary"
+                    htmlType="submit"
+                >
+                    Cập nhật
+                </Button>
+
+                <Button
+                    type="dashed"
+                    onClick={onDelete}
+                >
+                    Xoá bài giảng
+                </Button>
+
 
             </Form>
             <Modal

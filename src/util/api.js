@@ -209,6 +209,24 @@ const getChapters = () => {
     return axios.get(URL_API);
 }
 
+
+const getExams = (lectureId) => {
+    const URL_API = `/v1/api/exams/` + lectureId;
+    return axios.get(URL_API);
+}
+const createExam = (value) => {
+    const URL_API = `/v1/api/exam/`;
+    return axios.post(URL_API, value);
+}
+
+const getExam = (examId) => {
+    const URL_API = `/v1/api/exam/` + examId;
+    return axios.get(URL_API);
+}
+const updateExam = (examId, value) => {
+    const URL_API = `/v1/api/exam/` + examId;
+    return axios.put(URL_API, value);
+}
 export {
     createrUserApi,
     loginApi, getUsersApi,
@@ -223,5 +241,6 @@ export {
     importQuizz, getQuestionsByLecture,
     updateTitleVideo, createQuestionWithOptions, getQuestionDetailById, deleteQuestionById, updateQuestionWithOptions,
     getAchievements,
-    createChapter, updateChapter, getChapter, deleteChapter, getChapters
+    createChapter, updateChapter, getChapter, deleteChapter, getChapters,
+    getExams, createExam, getExam, updateExam
 }

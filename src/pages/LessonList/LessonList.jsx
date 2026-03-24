@@ -77,8 +77,8 @@ const LessonList = () => {
         <Space>
           <Button type="primary" icon={<EyeOutlined />} onClick={() => navigate(item._id)} >
             Chi tiết</Button>
-          <Button type="primary" icon={<EditOutlined />} onClick={() => navigate("/quiz/" + item._id)} >
-            quản lý câu hỏi
+          <Button type="primary" icon={<EditOutlined />} onClick={() => navigate("/exam/" + item._id)} >
+            quản lý đề thi
           </Button>
         </Space>
       )

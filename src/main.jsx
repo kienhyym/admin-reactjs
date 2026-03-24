@@ -20,6 +20,8 @@ import ExtendDetailPage from './pages/ExtendDetailPage/ExtendDetailPage.jsx'
 import QuestionDetailPage from './pages/QuestionDetail/QuestionDetail.jsx'
 import ChapterPage from './pages/ChapterPage/ChapterPage.jsx'
 import ChapterDetailPage from './pages/ChapterDetailPage/ChapterDetailPage.jsx'
+import ExamPage from './pages/ExamPage/ExamPage.jsx'
+import ExamDetailPage from './pages/ExamDetailPage/ExamDetailPage.jsx'
 
 const router = createBrowserRouter([
   {
@@ -75,9 +77,17 @@ const router = createBrowserRouter([
         path: "chapter",
         element: <ChapterPage />
       },
-       {
+      {
         path: "chapter/:id",
         element: <ChapterDetailPage />
+      },
+      {
+        path: 'exam/:lessonId',
+        element: <ExamPage />
+      },
+      {
+        path: 'exam/detail/:id',
+        element: <ExamDetailPage />
       },
     ]
   },

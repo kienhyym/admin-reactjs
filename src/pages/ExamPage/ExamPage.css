@@ -1,0 +1,30 @@
+.exam-page {
+  padding: 20px;
+}
+
+.exam-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.exam-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.status-open {
+  background-color: green;
+  color: white;
+  text-align: center;
+  width: 100px;
+  border-radius: 10px;
+}
+
+.status-close {
+  background-color: red;
+  color: white;
+  width: 100px;
+  text-align: center;
+  border-radius: 10px;
+}

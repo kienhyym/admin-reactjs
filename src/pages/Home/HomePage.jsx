@@ -39,12 +39,12 @@ const HomePage = () => {
     {
       title: "Tên học sinh",
       dataIndex: "name",
-      width: 370
+      width: 270
     },
     {
       title: "Lớp",
       dataIndex: "class",
-      width: 250
+      width: 150
     },
     {
       title: "Điểm",
@@ -55,7 +55,16 @@ const HomePage = () => {
       title: "Bài giảng",
       render: (item) => (
         <p>
-          {item?.lecture.title}
+          {item?.lecture?.title}
+        </p>
+      )
+    },
+     {
+      title: "Đề",
+       width: 150,
+      render: (item) => (
+        <p>
+          {item?.exam?.title}
         </p>
       )
     },

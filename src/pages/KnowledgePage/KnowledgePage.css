@@ -12,3 +12,13 @@
   display: flex;
   gap: 10px;
 }
+
+.pdf-small {
+  border-width: 1px;
+  border-style: solid;
+  height: 60px;
+  width: 100px;
+  justify-items: center;
+  align-content: center;
+  border-color: slategray;
+}

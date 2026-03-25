@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Table, Button, Space, Input, message, Image } from "antd";
+import { Table, Button, Space, message, Image } from "antd";
 import { PlusOutlined, EyeOutlined } from "@ant-design/icons";
 import "./KnowledgePage.css";
 import AddKnowledgeModal from "./KnowledgePageModal";
@@ -9,7 +9,6 @@ import { AuthContext } from "../../component/context/authContext";
 
 const KnowledgePage = () => {
   const [openModal, setOpenModal] = useState(false);
-  const [loading, setLoading] = useState(false);
   const [data, setData] = useState([])
   const navigate = useNavigate()
   const { setFullPageLoading } = useContext(AuthContext)
@@ -43,7 +42,15 @@ const KnowledgePage = () => {
       title: "hình ảnh",
       dataIndex: "imageUrl",
       width: 170,
-      render: (data) => <Image src={data} height={50} />
+      render: (data) => (
+        data?.slice(-4) === '.pdf' ?
+          <div className="pdf-small"><p>PDF</p></div>
+          :
+          <div className="pdf-small">
+            <  Image src={data} />
+          </div>
+
+      )
     },
     {
       title: "Hành động",
@@ -90,7 +97,7 @@ const KnowledgePage = () => {
         <h2>Quản lý nội dung tổng hợp kiến thức</h2>
 
         <div className="knowledge-actions">
-{/* 
+          {/* 
           <Input.Search
             placeholder="Tìm kiếm..."
             style={{ width: 250 }}
@@ -112,7 +119,6 @@ const KnowledgePage = () => {
 
       <AddKnowledgeModal
         open={openModal}
-        loading={loading}
         onCancel={() => setOpenModal(false)}
         onSubmit={handleAddLesson}
       />

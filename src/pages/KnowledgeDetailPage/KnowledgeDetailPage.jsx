@@ -2,12 +2,15 @@ import React, { useContext, useState } from "react";
 import "./KnowledgeDetailPage.css";
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import { deleteLKnowledge, getKnowledgeDetail, updateBaiGiang, updateKnowledge } from "../../util/api";
-import { Card, Form, Input, Upload, Button, List, Space, message, Spin, Image } from "antd";
+import { deleteLKnowledge, getKnowledgeDetail, updateKnowledge } from "../../util/api";
+import { Card, Form, Input, Upload, Button, message, Image } from "antd";
 import {
     UploadOutlined,
 } from "@ant-design/icons";
 import { AuthContext } from "../../component/context/authContext";
+import KnowledgePdfCard from "./KnowledgePdfCard/KnowledgePdfCard";
+import 'react-pdf/dist/Page/AnnotationLayer.css';
+
 const KnowledgeDetailPage = () => {
     const { id } = useParams();
     const navigate = useNavigate();
@@ -95,9 +98,16 @@ const KnowledgeDetailPage = () => {
                 >
                     <Input placeholder="Nhập tên tiêu đề" />
                 </Form.Item>
-                <Image src={knowledge.imageUrl} height={200} />
+
+                {
+                    knowledge?.imageUrl?.slice(-4) === '.pdf' ?
+                        <KnowledgePdfCard data={knowledge} />
+                        :
+                        <Image src={knowledge.imageUrl} height={200} />
+                }
+            <br/> <br/>
                 <Form.Item
-                    label="Upload hình ảnh mới"
+                    label="Tải tài liệu mới"
                     name="image"
                     valuePropName="fileList"
                     getValueFromEvent={(e) => {
@@ -110,9 +120,10 @@ const KnowledgeDetailPage = () => {
                         beforeUpload={() => false}
                         maxCount={1}
                         listType="picture"
+                        accept=".pdf,image/*"
                     >
                         <Button icon={<UploadOutlined />}>
-                            Upload image
+                            Tải tài liệu lên
                         </Button>
                     </Upload>
                 </Form.Item>

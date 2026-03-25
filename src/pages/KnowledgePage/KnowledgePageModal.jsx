@@ -34,7 +34,7 @@ const AddKnowledgeModal = ({ open, onCancel, onSubmit, loading }) => {
                     <Input placeholder="Nhập tiêu đề nội dung bài giảng" />
                 </Form.Item>
 
-               <Form.Item
+                <Form.Item
                     label="image"
                     name="image"
                     valuePropName="fileList"
@@ -44,6 +44,7 @@ const AddKnowledgeModal = ({ open, onCancel, onSubmit, loading }) => {
                         beforeUpload={() => false}
                         maxCount={1}
                         listType="picture"
+                        accept=".pdf,image/*"
                     >
                         <Button icon={<UploadOutlined />}>
                             Upload image
@@ -52,7 +53,6 @@ const AddKnowledgeModal = ({ open, onCancel, onSubmit, loading }) => {
                 </Form.Item>
 
             </Form>
-
         </Modal>
     );
 };

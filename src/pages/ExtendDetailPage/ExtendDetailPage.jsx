@@ -3,8 +3,9 @@ import "./ExtendDetailPage.css";
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { deleteLExtend, getExtendDetail, updateExtend } from "../../util/api";
-import { Card, Form, Input, Upload, Button, List, Space, message, } from "antd";
+import { Card, Form, Input, Upload, Button, List, Space, message, Image, } from "antd";
 import {
+    DeleteOutlined,
     UploadOutlined,
 } from "@ant-design/icons";
 import { AuthContext } from "../../component/context/authContext";
@@ -12,6 +13,8 @@ const ExtendDetailPage = () => {
     const { id } = useParams();
     const navigate = useNavigate();
     const [extend, setExtend] = useState([])
+    const [coverPhoto, setCoverPhoto] = useState(null)
+
     const [form] = Form.useForm();
     const { setFullPageLoading } = useContext(AuthContext)
 
@@ -26,27 +29,25 @@ const ExtendDetailPage = () => {
             setFullPageLoading(false)
             message.error("Xoá thất bại");
         }
-
-
     }
     const handleUpdate = async (values) => {
         setFullPageLoading(true)
         try {
 
             const formData = new FormData();
-
             formData.append("title", values.title);
             formData.append("link", values.link);
-            if (values && values?.videos) {
-                const file = values.videos[0];
-                formData.append("videos", file.originFileObj);
+            formData.append("image", coverPhoto);
+            if (values.image &&  values.image.length > 0) {
+                formData.append("image", values.image[0].originFileObj);
             }
-
-
             await updateExtend(id, formData);
             setFullPageLoading(false)
             message.success("Cập nhật bài giảng thành công");
-            // window.location.reload();
+            getData()
+            form.setFieldsValue({
+                image: null
+            });
 
         } catch (error) {
             console.log("error", error)
@@ -55,21 +56,21 @@ const ExtendDetailPage = () => {
         }
 
     };
-
-    useEffect(() => {
-        const festAccount = async () => {
-            setFullPageLoading(true)
-            const res = await getExtendDetail(id)
-            if (res) {
-                setExtend(res.data)
-            }
-            else {
-                console.log("res lectures error:");
-            }
-            setFullPageLoading(false)
-
+    const getData = async () => {
+        setFullPageLoading(true)
+        const res = await getExtendDetail(id)
+        if (res) {
+            setExtend(res.data)
+            setCoverPhoto(res?.data?.imageUrl)
         }
-        festAccount()
+        else {
+            console.log("res lectures error:");
+        }
+        setFullPageLoading(false)
+
+    }
+    useEffect(() => {
+        getData()
     }, [])
 
     useEffect(() => {
@@ -91,6 +92,7 @@ const ExtendDetailPage = () => {
         <Card title="Chỉnh sửa nội dung mở rộng">
 
             <Form
+                className="card-container"
                 form={form}
                 layout="vertical"
                 onFinish={handleUpdate}
@@ -106,49 +108,62 @@ const ExtendDetailPage = () => {
                 <Form.Item
                     label="đường dẫn thực hành"
                     name="link"
-                    rules={[{ required: true }]}
+                    rules={[
+                        { required: true, message: "Vui lòng nhập URL" },
+                        {
+                            validator: (_, value) => {
+                                if (!value) return Promise.resolve();
+
+                                try {
+                                    new URL(value);
+                                    return Promise.resolve();
+                                } catch {
+                                    return Promise.reject("URL không hợp lệ");
+                                }
+                            }
+                        }
+                    ]}
                 >
                     <Input placeholder="Nhập url" />
                 </Form.Item>
-                {/* <Form.Item label="video">
-                    {
-                        extend?.videoUrl ? <List
-                            bordered
-                            dataSource={[extend?.videoUrl]}
-                            renderItem={(video, index) => (
-                                <List.Item key={index}>
-                                    <Space direction="vertical">
-                                        <span>Video {index + 1}</span>
-                                        <video
-                                            width="300"
-                                            controls
-                                            src={video}
-                                        />
-                                    </Space>
-                                </List.Item>
-                            )}
-                        /> : <></>
-                    }
+                <label>Ảnh bìa hiện tại</label>
+                <div className="cover-image-container" >
+                    <div className="cover-image">
+                        {coverPhoto ?
+                            <Image src={coverPhoto} className="cover-main" /> : <p>NO IMAGE</p>
+                        }
 
-
-                </Form.Item> */}
-                {/* <Form.Item
-                    label="Upload video mới"
-                    name="videos"
+                    </div>
+                    {coverPhoto &&
+                        (<Button
+                            danger
+                            icon={<DeleteOutlined />}
+                            onClick={() => setCoverPhoto(null)}
+                        >
+                            Xoá
+                        </Button>)}
+                </div>
+                <br /> <br />
+                <Form.Item
+                    label="Hình bìa thì nghiệm"
+                    name="image"
                     valuePropName="fileList"
                     getValueFromEvent={(e) => {
                         return e?.fileList;
                     }}
+
                 >
                     <Upload
                         beforeUpload={() => false}
-                        multiple
+                        maxCount={1}
+                        listType="picture"
+                        accept="image/*"
                     >
                         <Button icon={<UploadOutlined />}>
-                            Chọn video
+                            Tải tài liệu lên
                         </Button>
                     </Upload>
-                </Form.Item> */}
+                </Form.Item>
                 <Button
                     type="primary"
                     htmlType="submit"

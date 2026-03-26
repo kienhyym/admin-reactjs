@@ -41,18 +41,27 @@ const AddExtendModal = ({ open, onCancel, onSubmit }) => {
                     <Input placeholder="Nhập url" />
                 </Form.Item>
 
-                {/* <Form.Item
-                    label="Upload video"
-                    name="videos"
+                <br /> <br />
+                <Form.Item
+                    label="Hình bìa thì nghiệm"
+                    name="image"
                     valuePropName="fileList"
-                    getValueFromEvent={(e) => e?.fileList}
+                    getValueFromEvent={(e) => {
+                        return e?.fileList;
+                    }}
+
                 >
-                    <Upload beforeUpload={() => false} >
+                    <Upload
+                        beforeUpload={() => false}
+                        maxCount={1}
+                        listType="picture"
+                        accept="image/*"
+                    >
                         <Button icon={<UploadOutlined />}>
-                            Chọn video
+                            Tải tài liệu lên
                         </Button>
                     </Upload>
-                </Form.Item> */}
+                </Form.Item>
 
             </Form>
 

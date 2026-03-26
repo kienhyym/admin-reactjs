@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Table, Button, Space, Input, message } from "antd";
-import { PlusOutlined, EditOutlined, DeleteOutlined, EyeOutlined } from "@ant-design/icons";
+import { Table, Button, Space, message, Image } from "antd";
+import { PlusOutlined, EyeOutlined } from "@ant-design/icons";
 import "./ExtendPage.css";
 import AddExtendModal from "./ExtendPageModal";
 import { getExtend, uploadExtend } from "../../util/api";
@@ -9,7 +9,6 @@ import { AuthContext } from "../../component/context/authContext";
 
 const ExtendPage = () => {
   const [openModal, setOpenModal] = useState(false);
-  const [loading, setLoading] = useState(false);
   const [data, setData] = useState([])
   const navigate = useNavigate()
   const { setFullPageLoading } = useContext(AuthContext)
@@ -21,14 +20,13 @@ const ExtendPage = () => {
       setData(res.data)
     }
     else {
-      console.log("res lectures error:");
+      message.error(res?.message)
     }
     setFullPageLoading(false)
   }
   useEffect(() => {
     getData()
   }, [])
-
 
   const columns = [
     {
@@ -50,6 +48,16 @@ const ExtendPage = () => {
       )
     },
     {
+      title: "hình ảnh",
+      dataIndex: "imageUrl",
+      width: 170,
+      render: (data) => (
+        <div className="pdf-small">
+          {data ? <  Image src={data} /> : <p>NO IMAGE</p>}
+        </div>
+      )
+    },
+    {
       title: "Hành động",
       width: 170,
       render: (item) => (
@@ -61,18 +69,16 @@ const ExtendPage = () => {
   ];
   // thêm bài giảng
   const handleAddLesson = async (values) => {
-
     try {
 
       setFullPageLoading(true)
       const formData = new FormData();
       formData.append("title", values.title);
       formData.append("link", values.link);
-      // const file = values.videos[0];
-      // if (file) {
-      //   formData.append("videos", file.originFileObj);
-      // }
-
+      const file = values?.image;
+      if (file && values?.image.length > 0) {
+        formData.append("image", values?.image[0].originFileObj);
+      }
       const res = await uploadExtend(formData);
       if (res) {
         message.success("Thêm bài giảng thành công");
@@ -82,7 +88,6 @@ const ExtendPage = () => {
       setFullPageLoading(false)
 
     } catch (error) {
-      console.log('error', error)
       message.error("Upload thất bại");
       setFullPageLoading(false)
     } finally {

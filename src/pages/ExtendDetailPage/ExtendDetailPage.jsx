@@ -89,7 +89,7 @@ const ExtendDetailPage = () => {
 
     return (
 
-        <Card title="Chỉnh sửa nội dung mở rộng">
+        <Card title="Chỉnh sửa nội dung kiến thức mở rộng">
 
             <Form
                 className="card-container"

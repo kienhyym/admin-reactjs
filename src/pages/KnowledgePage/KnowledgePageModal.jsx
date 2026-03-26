@@ -35,7 +35,7 @@ const AddKnowledgeModal = ({ open, onCancel, onSubmit, loading }) => {
                 </Form.Item>
 
                 <Form.Item
-                    label="image"
+                    label={<p>Nội dung (<i>hình ảnh hoặc pdf)</i></p>}
                     name="image"
                     valuePropName="fileList"
                     getValueFromEvent={(e) => e?.fileList}
@@ -47,7 +47,7 @@ const AddKnowledgeModal = ({ open, onCancel, onSubmit, loading }) => {
                         accept=".pdf,image/*"
                     >
                         <Button icon={<UploadOutlined />}>
-                            Upload image
+                          Tải nội dung lên
                         </Button>
                     </Upload>
                 </Form.Item>

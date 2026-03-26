@@ -145,7 +145,7 @@ const ExtendDetailPage = () => {
                 </div>
                 <br /> <br />
                 <Form.Item
-                    label="Hình bìa thì nghiệm"
+                    label="Hình bìa thí nghiệm"
                     name="image"
                     valuePropName="fileList"
                     getValueFromEvent={(e) => {

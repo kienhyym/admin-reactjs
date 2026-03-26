@@ -5,18 +5,17 @@ import { useEffect } from "react";
 import { deleteLKnowledge, getKnowledgeDetail, updateKnowledge } from "../../util/api";
 import { Card, Form, Input, Upload, Button, message, Image } from "antd";
 import {
+    DeleteOutlined,
     UploadOutlined,
 } from "@ant-design/icons";
 import { AuthContext } from "../../component/context/authContext";
-import KnowledgePdfCard from "./KnowledgePdfCard/KnowledgePdfCard";
-import 'react-pdf/dist/Page/AnnotationLayer.css';
 
 const KnowledgeDetailPage = () => {
     const { id } = useParams();
     const navigate = useNavigate();
     const [knowledge, setKnowledge] = useState([])
     const [form] = Form.useForm();
-    const [thumbnail, setThumbnail] = useState([]);
+    const [thumbnail, setThumbnail] = useState(null);
     const { setFullPageLoading } = useContext(AuthContext)
 
     const onDelete = async () => {
@@ -38,17 +37,18 @@ const KnowledgeDetailPage = () => {
         try {
             const formData = new FormData();
             formData.append("title", values.title);
-            if (thumbnail.length > 0) {
-                formData.append("image", thumbnail[0].originFileObj);
+            formData.append("image", thumbnail);
+            if (values.image && values.image.length > 0) {
+                formData.append("image", values.image[0].originFileObj);
             }
-
             await updateKnowledge(id, formData);
             setFullPageLoading(false)
             message.success("Cập nhật bài giảng thành công");
             getData()
-
+            form.setFieldsValue({
+                image: null,
+            });
         } catch (error) {
-            console.log("error", error)
             setFullPageLoading(false)
             message.error("Cập nhật thất bại");
 
@@ -60,9 +60,11 @@ const KnowledgeDetailPage = () => {
         const res = await getKnowledgeDetail(id)
         if (res) {
             setKnowledge(res.data)
+            setThumbnail(res?.data?.imageUrl)
+
         }
         else {
-            console.log("res lectures error:");
+            message.error(res?.message)
         }
         setFullPageLoading(false)
     }
@@ -86,6 +88,7 @@ const KnowledgeDetailPage = () => {
         <Card title="Chỉnh sửa nội kiến thức tổng hợp">
 
             <Form
+                className="card-container"
                 form={form}
                 layout="vertical"
                 onFinish={handleUpdate}
@@ -99,19 +102,37 @@ const KnowledgeDetailPage = () => {
                     <Input placeholder="Nhập tên tiêu đề" />
                 </Form.Item>
 
-                {
-                    knowledge?.imageUrl?.slice(-4) === '.pdf' ?
-                        <KnowledgePdfCard data={knowledge} />
-                        :
-                        <Image src={knowledge.imageUrl} height={200} />
-                }
-            <br/> <br/>
+
+                <label>Nội dung</label>
+                <div className="cover-image-container" >
+                    <div className="cover-image">
+                        {thumbnail ? (knowledge?.imageUrl?.slice(-4) === '.pdf' ?
+                            <iframe
+                                src={`https://docs.google.com/gview?url=${knowledge.imageUrl}&embedded=true`}
+                                width="100%"
+                                height="220"
+                            />
+                            : <Image src={thumbnail} className="cover-main" />
+                        )
+                            : <p>NO DATA</p>
+                        }
+                    </div>
+
+                    {thumbnail &&
+                        (<Button
+                            danger
+                            icon={<DeleteOutlined />}
+                            onClick={() => setThumbnail(null)}
+                        >
+                            Xoá
+                        </Button>)}
+                </div>
+                <br /> <br />
                 <Form.Item
                     label="Tải tài liệu mới"
                     name="image"
                     valuePropName="fileList"
                     getValueFromEvent={(e) => {
-                        setThumbnail(e?.fileList || []);
                         return e?.fileList;
                     }}
 
@@ -140,10 +161,7 @@ const KnowledgeDetailPage = () => {
                 >
                     Xoá nội dung
                 </Button>
-
-
             </Form>
-
         </Card>
     );
 };

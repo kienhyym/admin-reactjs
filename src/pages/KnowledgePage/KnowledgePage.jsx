@@ -63,15 +63,17 @@ const KnowledgePage = () => {
       )
     }
   ];
-  // thêm bài giảng
   const handleAddLesson = async (values) => {
-
     try {
-
       setFullPageLoading(true);
       const formData = new FormData();
       formData.append("title", values.title);
-      formData.append("image", values.image[0].originFileObj);
+
+       const file = values?.image;
+      if (file && values?.image.length > 0) {
+        formData.append("image", values?.image[0].originFileObj);
+      }
+
       const res = await uploadKnowledge(formData);
       if (res) {
         message.success("Thêm bài giảng thành công");
@@ -82,12 +84,9 @@ const KnowledgePage = () => {
     } catch (error) {
       message.error("Upload thất bại");
       setFullPageLoading(false)
-
     } finally {
       setFullPageLoading(false)
-
     }
-
   };
   return (
     <div className="knowledge-page">

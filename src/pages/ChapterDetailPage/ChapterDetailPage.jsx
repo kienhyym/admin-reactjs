@@ -5,23 +5,25 @@ import { useEffect } from "react";
 import { deleteChapter, getChapter, updateChapter } from "../../util/api";
 import { Card, Form, Input, Button, message, Switch, } from "antd";
 import { AuthContext } from "../../component/context/authContext";
+import ConfirmDeleteModal from "./ConfirmDeleteModal";
 const ChapterDetailPage = () => {
     const { id } = useParams();
     const navigate = useNavigate();
     const [chapter, setChapter] = useState([])
     const [form] = Form.useForm();
     const { setFullPageLoading } = useContext(AuthContext)
-
-    const onDelete = async () => {
+    const [showDelete, setShowDelete] = useState(false);
+    const handleDelete = async () => {
         setFullPageLoading(true)
         try {
-            // await deleteChapter(id);
-            // setFullPageLoading(false)
-            // navigate(-1)
-            message.error("Xoá nội dung đang được bảo trì");
+            await deleteChapter(id);
+            message.success("Xoá thành công");
             setFullPageLoading(false)
+            setShowDelete(false)
+            navigate(-1)
         } catch (error) {
             setFullPageLoading(false)
+            setShowDelete(false)
             message.error("Xoá thất bại");
         }
     }
@@ -113,11 +115,17 @@ const ChapterDetailPage = () => {
 
                 <Button
                     type="dashed"
-                    onClick={onDelete}
+                    onClick={() => setShowDelete(true)}
                 >
                     Xoá nội dung
                 </Button>
             </Form>
+            <ConfirmDeleteModal
+                visible={showDelete}
+                title={chapter?.title}
+                onCancel={() => setShowDelete(false)}
+                onConfirm={() => handleDelete(chapter._id)}
+            />
         </Card>
     );
 };

@@ -42,6 +42,7 @@ const AddChapterModal = ({ open, onCancel, onSubmit }) => {
                     label="Trạng thái hiển thị"
                     name="status"
                     valuePropName="checked"
+                    initialValue={true}
                 >
                     <Switch
                         checkedChildren="Hiển thị"

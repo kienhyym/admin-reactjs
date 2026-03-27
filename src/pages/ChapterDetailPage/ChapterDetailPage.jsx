@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { deleteChapter, getChapter, updateChapter } from "../../util/api";
 import { Card, Form, Input, Button, message, Switch, } from "antd";
 import { AuthContext } from "../../component/context/authContext";
-import ConfirmDeleteModal from "./ConfirmDeleteModal";
+import ConfirmDeleteModal from "../../component/layout/DeleteModal/ConfirmDeleteModal";
 const ChapterDetailPage = () => {
     const { id } = useParams();
     const navigate = useNavigate();

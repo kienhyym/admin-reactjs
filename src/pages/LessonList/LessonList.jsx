@@ -23,7 +23,7 @@ const LessonList = () => {
       setData(res.data)
     }
     else {
-      console.log("res lectures error:");
+      message.error(res.message)
     }
     setFullPageLoading(false)
   }
@@ -46,7 +46,7 @@ const LessonList = () => {
       dataIndex: "videos",
       width: 170,
       render: (videos) => (
-        <p>
+        <p >
           {videos?.length}
         </p>
       )
@@ -54,14 +54,17 @@ const LessonList = () => {
     {
       title: "hình ảnh",
       dataIndex: "thumbnail",
-        width: 170,
+      width: 170,
       render: (data) => (
-        <Image src={data} height={50} />
+        <div className="image-small">
+          {data ? <  Image src={data} /> : <p>NO IMAGE</p>}
+        </div>
       )
     },
+
     {
       title: "Trạng thái",
-           width: 170,
+      width: 170,
       render: (item) => (
         <>
           {item.status ?
@@ -72,7 +75,7 @@ const LessonList = () => {
     },
     {
       title: "Hành động",
-           width: 310,
+      width: 310,
       render: (item) => (
         <Space>
           <Button type="primary" icon={<EyeOutlined />} onClick={() => navigate(item._id)} >
@@ -86,41 +89,42 @@ const LessonList = () => {
   ];
 
   // thêm bài giảng
-  const handleAddLesson = async (values) => {
+  const handleAddLesson = async (values, form) => {
     try {
       setFullPageLoading(true)
       const formData = new FormData();
       formData.append("title", values.title);
       formData.append("status", values.status);
 
+
       // thumbnail
-      if (values.thumbnail?.length > 0) {
+      if (values?.thumbnail?.length > 0) {
         formData.append(
           "thumbnail",
           values.thumbnail[0].originFileObj
         );
       }
-      values.videos.forEach(file => {
-        formData.append("videos", file.originFileObj);
-      });
+      if (values?.videos && values?.videos.length > 0) {
+        values.videos.forEach(file => {
+          formData.append("videos", file.originFileObj);
+        });
+      }
+
       const res = await uploadBaiGiang(values.chapterId, formData);
       if (res) {
-        console.log("13213", res)
         getData();
         message.success("Thêm bài giảng thành công");
+        form.resetFields();
       }
       setFullPageLoading(false)
       setOpenModal(false);
 
     } catch (error) {
-      console.log('error', error)
       setFullPageLoading(false)
-      message.error("Upload thất bại");
-
+      message.error("Tạo bài giảng thất bại");
     } finally {
       setFullPageLoading(false)
     }
-
   };
 
   return (
@@ -144,7 +148,7 @@ const LessonList = () => {
       </div>
       {data.map((item) => {
         return (
-          <>
+          <div key={item._id}>
             <div className="title-chapper"  >
               <h3 >{item.title} {item?.name}</h3>
               {
@@ -161,7 +165,7 @@ const LessonList = () => {
               rowKey="_id"
               dataSource={item.lectures}
             />
-          </>)
+          </div>)
       })}
 
 

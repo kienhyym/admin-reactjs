@@ -33,6 +33,7 @@
   color: red;
   margin-left: 20px;
 }
+
 .status-open {
   background-color: green;
   color: white;
@@ -47,4 +48,14 @@
   width: 100px;
   text-align: center;
   border-radius: 10px;
+}
+
+.image-small {
+  border-width: 1px;
+  border-style: solid;
+  height: 60px;
+  width: 100px;
+  justify-items: center;
+  align-content: center;
+  border-color: slategray;
 }

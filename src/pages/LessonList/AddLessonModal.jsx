@@ -7,8 +7,7 @@ const AddLessonModal = ({ open, onCancel, onSubmit, data }) => {
     const [form] = Form.useForm();
     const handleOk = () => {
         form.validateFields().then(values => {
-            onSubmit(values);
-            form.resetFields();
+            onSubmit(values,form);
         });
     };
 
@@ -55,6 +54,7 @@ const AddLessonModal = ({ open, onCancel, onSubmit, data }) => {
                         beforeUpload={() => false}
                         maxCount={1}
                         listType="picture"
+                        accept="image/*"
                     >
                         <Button icon={<UploadOutlined />}>
                             Upload hình ảnh
@@ -70,6 +70,7 @@ const AddLessonModal = ({ open, onCancel, onSubmit, data }) => {
                     <Upload
                         beforeUpload={() => false}
                         multiple
+                        accept="video/*"
                     >
                         <Button icon={<UploadOutlined />}>
                             Chọn video
@@ -80,6 +81,7 @@ const AddLessonModal = ({ open, onCancel, onSubmit, data }) => {
                     label="Trạng thái hiển thị"
                     name="status"
                     valuePropName="checked"
+                    initialValue={true}
                 >
                     <Switch
                         checkedChildren="Hiển thị"

@@ -9,14 +9,16 @@ import {
     DeleteOutlined
 } from "@ant-design/icons";
 import { AuthContext } from "../../component/context/authContext";
+import ConfirmDeleteModal from "../../component/layout/DeleteModal/ConfirmDeleteModal";
+
+
 const LessonDetail = () => {
     const { id } = useParams();
     const navigate = useNavigate();
     const [lesson, setLesson] = useState([])
     const [form] = Form.useForm();
     const [deletedVideos, setDeletedVideos] = useState([]);
-    const [newVideos, setNewVideos] = useState([]);
-    const [thumbnail, setThumbnail] = useState([]);
+    const [thumbnail, setThumbnail] = useState(null);
 
     const [editVideoModal, setEditVideoModal] = useState(false);
     const [editingVideo, setEditingVideo] = useState(null);
@@ -29,9 +31,10 @@ const LessonDetail = () => {
         const res = await getLectureDetailApi(id)
         if (res) {
             setLesson(res.data)
+            setThumbnail(res?.data?.lecture?.thumbnail)
         }
         else {
-            console.log("res lectures error:");
+            message.error(res.message)
         }
         setFullPageLoading(false)
     }
@@ -94,23 +97,33 @@ const LessonDetail = () => {
 
             formData.append("title", values.title);
             formData.append("status", values.status);
+            formData.append("thumbnail", thumbnail);
+
             // thumbnail mới
-            if (thumbnail.length > 0) {
-                formData.append("thumbnail", thumbnail[0].originFileObj);
+            if (values.thumbnail && values.thumbnail.length > 0) {
+                formData.append("thumbnail", values.thumbnail[0].originFileObj);
             }
             // video mới
-            newVideos.forEach(file => {
-                formData.append("videos", file.originFileObj);
-            });
+            if (values.videos && values.videos.length > 0) {
+                values.videos.forEach(file => {
+                    formData.append("videos", file.originFileObj);
+                });
+            }
+
             // video bị xoá
             deletedVideos.forEach(video => {
                 formData.append("deletedVideos", video);
             });
 
             await updateBaiGiang(id, formData);
+            getData()
             setFullPageLoading(false)
             message.success("Cập nhật bài giảng thành công");
-            getData()
+
+            form.setFieldsValue({
+                thumbnail: null,
+                videos: null
+            });
 
         } catch (error) {
             setFullPageLoading(false)
@@ -133,6 +146,24 @@ const LessonDetail = () => {
         }
     }, [lesson]);
 
+
+
+    const [showDelete, setShowDelete] = useState(false);
+    const handleDelete = async () => {
+        setFullPageLoading(true)
+        try {
+            await onDelete();
+            message.success("Xoá thành công");
+            setFullPageLoading(false)
+            setShowDelete(false)
+            navigate("/lessons")
+        } catch (error) {
+            setFullPageLoading(false)
+            setShowDelete(false)
+            message.error("Xoá thất bại");
+        }
+    }
+
     if (!lesson) {
         return <h2 style={{ padding: 40 }}>Không tìm thấy bài học</h2>;
     }
@@ -141,6 +172,7 @@ const LessonDetail = () => {
         <Card title="Chỉnh sửa bài giảng">
 
             <Form
+                className="card-container"
                 form={form}
                 layout="vertical"
                 onFinish={handleUpdate}
@@ -153,32 +185,41 @@ const LessonDetail = () => {
                 >
                     <Input placeholder="Nhập tên bài giảng" />
                 </Form.Item>
-                <div style={{ marginBottom: 20 }}>
-                    <h4>Thumbnail hiện tại</h4>
+                <label>Ảnh bìa bài giảng</label>
+                <div className="cover-image-container" >
+                    <div className="cover-image">
+                        {thumbnail ?
+                            <Image src={thumbnail} className="cover-main" /> : <p>NO IMAGE</p>
+                        }
 
-                    {lesson?.lecture?.thumbnail && (
-                        <Image
-                            src={lesson?.lecture?.thumbnail}
-                            height={200}
-                        />
-                    )}
+                    </div>
+                    {thumbnail &&
+                        (<Button
+                            danger
+                            icon={<DeleteOutlined />}
+                            onClick={() => setThumbnail(null)}
+                        >
+                            Xoá
+                        </Button>)}
                 </div>
+                <br />
                 <Form.Item
-                    label="Hình ảnh"
+                    label="Hình bìa bài giảng"
                     name="thumbnail"
                     valuePropName="fileList"
                     getValueFromEvent={(e) => {
-                        setThumbnail(e?.fileList || []);
                         return e?.fileList;
                     }}
+
                 >
                     <Upload
                         beforeUpload={() => false}
                         maxCount={1}
                         listType="picture"
+                        accept="image/*"
                     >
                         <Button icon={<UploadOutlined />}>
-                            Upload hình ảnh
+                            Tải tài liệu lên
                         </Button>
                     </Upload>
                 </Form.Item>
@@ -225,13 +266,13 @@ const LessonDetail = () => {
                     name="videos"
                     valuePropName="fileList"
                     getValueFromEvent={(e) => {
-                        setNewVideos(e?.fileList || []);
                         return e?.fileList;
                     }}
                 >
                     <Upload
                         beforeUpload={() => false}
                         multiple
+                        accept="video/*"
                     >
                         <Button icon={<UploadOutlined />}>
                             Chọn video
@@ -257,7 +298,7 @@ const LessonDetail = () => {
 
                 <Button
                     type="dashed"
-                    onClick={onDelete}
+                    onClick={() => setShowDelete(true)}
                 >
                     Xoá bài giảng
                 </Button>
@@ -276,6 +317,12 @@ const LessonDetail = () => {
                     placeholder="Nhập tiêu đề video"
                 />
             </Modal>
+            <ConfirmDeleteModal
+                visible={showDelete}
+                title={lesson?.lecture?.title}
+                onCancel={() => setShowDelete(false)}
+                onConfirm={handleDelete}
+            />
         </Card>
     );
 };

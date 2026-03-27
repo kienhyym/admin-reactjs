@@ -2,14 +2,14 @@ import React, { useContext, useEffect, useState } from "react";
 import { Card, Upload, Button, Table, message, Space } from "antd";
 import { EyeOutlined, UploadOutlined } from "@ant-design/icons";
 import { useNavigate, useParams } from "react-router-dom";
-import { createQuestionWithOptions, getQuestionsByLecture, importQuizz } from "../../util/api";
+import { createQuestion, getQuestions, importQuizz } from "../../util/api";
 import AddQuestionModal from "./AddQuestionModal";
 import { AuthContext } from "../../component/context/authContext";
 
 const QuizDetail = () => {
   const navigate = useNavigate()
-  const { lessonId } = useParams();
-  const id = lessonId
+  const { examId } = useParams();
+  const [title, setTitle] = useState('');
   const [questions, setQuestions] = useState([]);
   const [openModal, setOpenModal] = useState(false);
   const { setFullPageLoading } = useContext(AuthContext)
@@ -17,7 +17,7 @@ const QuizDetail = () => {
   const handleAddQuestion = async (values) => {
     try {
       setFullPageLoading(true)
-      const res = await createQuestionWithOptions(id, values)
+      const res = await createQuestion(examId, values)
       if (res?.status === 'ok') {
         message.success("Tạo thành công")
         getData()
@@ -33,9 +33,10 @@ const QuizDetail = () => {
   const getData = async () => {
     try {
       setFullPageLoading(true)
-      const res = await getQuestionsByLecture(id)
+      const res = await getQuestions(examId)
       if (res) {
-        setQuestions(res.questions)
+        setQuestions(res.data.questions)
+        setTitle(`${res.data.lectureTitle}: ${res.data.examTitle}`)
       }
       else {
         message.error(res?.message)
@@ -74,29 +75,23 @@ const QuizDetail = () => {
       )
     }
   ];
+  
   const handleImport = async (file) => {
-
     try {
-
       const formData = new FormData();
       formData.append("file", file);
-      await importQuizz(lessonId, formData);
-
+      await importQuizz(examId, formData);
       message.success("Import câu hỏi thành công");
-
     } catch (error) {
-
       message.error("Import thất bại");
-
     }
-
   };
 
   return (
     <div style={{ padding: 20 }}>
 
       <Card
-        title={`Quiz ${id}`}
+        title={title}
         extra={
           <Upload
             accept=".json"

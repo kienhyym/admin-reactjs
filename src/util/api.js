@@ -134,9 +134,8 @@ const deleteLKnowledge = (value) => {
     return axios.delete(URL_API);
 }
 
-const importQuizz = (lectureId, questions) => {
-    const URL_API = `/v1/api/lectures/${lectureId}/questions/import`;
-
+const importQuizz = (examId, questions) => {
+    const URL_API = `/v1/api/lectures/${examId}/questions/import`;
     return axios.post(URL_API, questions, {
         headers: {
             "Content-Type": "multipart/form-data"
@@ -152,33 +151,36 @@ const updateTitleVideo = (id, value) => {
     return axios.put(URL_API, value);
 }
 
-const createQuestionWithOptions = (id, value) => {
-    const URL_API = `/v1/api/questions/options/` + id;
+// +++++++++ QUESTIONS ++++++++++++++
+const createQuestion = (examId, value) => {
+    const URL_API = `/v1/api/questions/` + examId;
     return axios.post(URL_API, value, {
         headers: {
             "Content-Type": "multipart/form-data"
         }
     });
 }
-const updateQuestionWithOptions = (id, value) => {
-    const URL_API = `/v1/api/question/` + id;
+const updateQuestion = (questionId, value) => {
+    const URL_API = `/v1/api/question/` + questionId;
     return axios.put(URL_API, value, {
         headers: {
             "Content-Type": "multipart/form-data"
         }
     });
 }
-
-
-const getQuestionDetailById = (id) => {
-    const URL_API = `/v1/api/question/${id}`;
+const getQuestions = (examId) => {
+    const URL_API = `/v1/api/questions/${examId}`;
     return axios.get(URL_API);
 }
-const deleteQuestionById = (id) => {
-    const URL_API = `/v1/api/question/${id}`;
+const getQuestion = (questionId) => {
+    const URL_API = `/v1/api/question/${questionId}`;
+    return axios.get(URL_API);
+}
+const deleteQuestion = (questionId) => {
+    const URL_API = `/v1/api/question/${questionId}`;
     return axios.delete(URL_API);
 }
-
+// ######################################################
 const getAchievements = () => {
     const URL_API = `/v1/api/achievements`;
     return axios.get(URL_API);
@@ -239,7 +241,8 @@ export {
     uploadExtend, getExtend, getExtendDetail, deleteLExtend, updateExtend,
     uploadKnowledge, updateKnowledge, getKnowledge, getKnowledgeDetail, deleteLKnowledge,
     importQuizz, getQuestionsByLecture,
-    updateTitleVideo, createQuestionWithOptions, getQuestionDetailById, deleteQuestionById, updateQuestionWithOptions,
+    updateTitleVideo, 
+    createQuestion, getQuestion, deleteQuestion, updateQuestion,getQuestions,
     getAchievements,
     createChapter, updateChapter, getChapter, deleteChapter, getChapters,
     getExams, createExam, getExam, updateExam

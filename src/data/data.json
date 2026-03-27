@@ -1,0 +1,169 @@
+{
+  "data": [
+    {
+      "content": "Phản ứng giữa hydrogen và oxygen tạo thành nước. Chất tham gia phản ứng là",
+      "type": "single",
+      "image": null,
+      "options": [
+        { "content": "Hydrogen, nước", "image": null, "isCorrect": false },
+        { "content": "Hydrogen, oxygen", "image": null, "isCorrect": true },
+        { "content": "Oxygen, nước", "image": null, "isCorrect": false },
+        { "content": "Nước", "image": null, "isCorrect": false }
+      ]
+    },
+    {
+      "content": "Phản ứng hóa học là",
+      "type": "single",
+      "image": null,
+      "options": [
+        { "content": "quá trình kết hợp các đơn chất thành hợp chất", "image": null, "isCorrect": false },
+        { "content": "quá trình biến đổi chất này thành chất khác", "image": null, "isCorrect": true },
+        { "content": "sự trao đổi của hai hay nhiều chất ban đầu để tạo chất mới", "image": null, "isCorrect": false },
+        { "content": "quá trình phân hủy chất ban đầu thành nhiều chất", "image": null, "isCorrect": false }
+      ]
+    },
+    {
+      "content": "Sodium + Oxygen → Sodium oxide. Sản phẩm của phản ứng là",
+      "type": "single",
+      "image": null,
+      "options": [
+        { "content": "Sodium", "image": null, "isCorrect": false },
+        { "content": "Oxygen", "image": null, "isCorrect": false },
+        { "content": "Sodium oxide", "image": null, "isCorrect": true },
+        { "content": "Sodium và oxygen", "image": null, "isCorrect": false }
+      ]
+    },
+    {
+      "content": "Phản ứng tỏa nhiệt là phản ứng có đặc điểm",
+      "type": "single",
+      "image": null,
+      "options": [
+        { "content": "Giải phóng năng lượng (dạng nhiệt) ra môi trường", "image": null, "isCorrect": true },
+        { "content": "Chất phản ứng truyền nhiệt cho sản phẩm", "image": null, "isCorrect": false },
+        { "content": "Chất phản ứng thu nhiệt từ môi trường", "image": null, "isCorrect": false },
+        { "content": "Các chất sản phẩm thu nhiệt từ môi trường", "image": null, "isCorrect": false }
+      ]
+    },
+    {
+      "content": "Phản ứng xảy ra khi các chất tham gia … với nhau",
+      "type": "single",
+      "image": null,
+      "options": [
+        { "content": "liên kết", "image": null, "isCorrect": false },
+        { "content": "tiếp xúc", "image": null, "isCorrect": true },
+        { "content": "phản ứng", "image": null, "isCorrect": false },
+        { "content": "hoá hợp", "image": null, "isCorrect": false }
+      ]
+    },
+    {
+      "content": "Dấu hiệu nào chứng tỏ có phản ứng hoá học xảy ra",
+      "type": "single",
+      "image": null,
+      "options": [
+        { "content": "Sự thay đổi màu sắc", "image": null, "isCorrect": false },
+        { "content": "Xuất hiện khí hoặc kết tủa", "image": null, "isCorrect": false },
+        { "content": "Có sự tỏa nhiệt và phát sáng", "image": null, "isCorrect": false },
+        { "content": "Tất cả các dấu hiệu trên", "image": null, "isCorrect": true }
+      ]
+    },
+    {
+      "content": "Phản ứng thu nhiệt là phản ứng trong đó",
+      "type": "single",
+      "image": null,
+      "options": [
+        { "content": "hỗn hợp phản ứng nhận nhiệt từ môi trường", "image": null, "isCorrect": true },
+        { "content": "các chất sản phẩm nhận nhiệt từ chất phản ứng", "image": null, "isCorrect": false },
+        { "content": "các chất phản ứng truyền nhiệt cho môi trường", "image": null, "isCorrect": false },
+        { "content": "các chất sản phẩm truyền nhiệt cho môi trường", "image": null, "isCorrect": false }
+      ]
+    },
+    {
+      "content": "Phản ứng nào sau đây là phản ứng tỏa nhiệt",
+      "type": "single",
+      "image": null,
+      "options": [
+        { "content": "Nung đá vôi", "image": null, "isCorrect": false },
+        { "content": "Đốt cháy khí gas", "image": null, "isCorrect": true },
+        { "content": "Hòa tan viên C sủi", "image": null, "isCorrect": false },
+        { "content": "Phân hủy đường", "image": null, "isCorrect": false }
+      ]
+    },
+    {
+      "content": "Quá trình nào sau đây là quá trình thu nhiệt",
+      "type": "single",
+      "image": null,
+      "options": [
+        { "content": "Đốt cháy cồn", "image": null, "isCorrect": false },
+        { "content": "Hoà tan phân đạm urea làm nước lạnh", "image": null, "isCorrect": true },
+        { "content": "Đốt cháy mẩu giấy", "image": null, "isCorrect": false },
+        { "content": "Thêm H2SO4 đặc vào nước làm nóng", "image": null, "isCorrect": false }
+      ]
+    },
+    {
+      "content": "Trước và sau phản ứng hóa học, yếu tố nào thay đổi",
+      "type": "single",
+      "image": null,
+      "options": [
+        { "content": "khối lượng các nguyên tử", "image": null, "isCorrect": false },
+        { "content": "số lượng nguyên tử", "image": null, "isCorrect": false },
+        { "content": "liên kết giữa các nguyên tử", "image": null, "isCorrect": true },
+        { "content": "thành phần nguyên tố", "image": null, "isCorrect": false }
+      ]
+    },
+    {
+      "content": "Hiện tượng nào có phản ứng hoá học xảy ra",
+      "type": "single",
+      "image": null,
+      "options": [
+        { "content": "Sương đọng trên lá", "image": null, "isCorrect": false },
+        { "content": "Hơi nước ngưng tụ thành mưa", "image": null, "isCorrect": false },
+        { "content": "Cháy rừng mùa khô", "image": null, "isCorrect": true },
+        { "content": "Nước trên đường khô dần", "image": null, "isCorrect": false }
+      ]
+    },
+    {
+      "content": "Cho bột kẽm vào dung dịch HCl thấy bọt khí thoát ra. Dấu hiệu phản ứng xảy ra là",
+      "type": "single",
+      "image": null,
+      "options": [
+        { "content": "bột kẽm tan dần và có bọt khí", "image": null, "isCorrect": true },
+        { "content": "tạo thành dung dịch zinc chloride", "image": null, "isCorrect": false },
+        { "content": "tạo thành chất không tan", "image": null, "isCorrect": false },
+        { "content": "lượng acid giảm", "image": null, "isCorrect": false }
+      ]
+    },
+    {
+      "content": "Phát biểu nào sau đây đúng",
+      "type": "single",
+      "image": null,
+      "options": [
+        { "content": "Nguyên tử bị phá vỡ", "image": null, "isCorrect": false },
+        { "content": "Liên kết trong phân tử bị phá vỡ", "image": null, "isCorrect": true },
+        { "content": "Liên kết không bị phá vỡ", "image": null, "isCorrect": false },
+        { "content": "Các phân tử được bảo toàn", "image": null, "isCorrect": false }
+      ]
+    },
+    {
+      "content": "Quá trình nào là biến đổi hoá học",
+      "type": "single",
+      "image": null,
+      "options": [
+        { "content": "Hòa tan muối vào nước", "image": null, "isCorrect": false },
+        { "content": "Mực loang trong nước", "image": null, "isCorrect": false },
+        { "content": "Trứng để lâu bị hỏng", "image": null, "isCorrect": true },
+        { "content": "Dây tóc bóng đèn nóng sáng", "image": null, "isCorrect": false }
+      ]
+    },
+    {
+      "content": "Phát biểu nào sau đây sai về sản xuất vôi sống",
+      "type": "single",
+      "image": null,
+      "options": [
+        { "content": "Trong quá trình sản xuất vôi chỉ có biến đổi hóa học", "image": null, "isCorrect": true },
+        { "content": "Công đoạn nung là biến đổi hóa học", "image": null, "isCorrect": false },
+        { "content": "Có khí CO2 là dấu hiệu phản ứng", "image": null, "isCorrect": false },
+        { "content": "Đá vôi → Vôi sống + CO2", "image": null, "isCorrect": false }
+      ]
+    }
+  ]
+}

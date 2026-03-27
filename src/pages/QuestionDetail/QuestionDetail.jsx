@@ -15,7 +15,7 @@ import {
     PlusOutlined
 } from "@ant-design/icons";
 
-import { deleteQuestionById, getQuestionDetailById, updateQuestionWithOptions } from "../../util/api";
+import { deleteQuestion, getQuestion, updateQuestion } from "../../util/api";
 import { useNavigate, useParams } from "react-router-dom";
 import "./QuestionDetailPage.css";
 import { AuthContext } from "../../component/context/authContext";
@@ -35,7 +35,7 @@ const QuestionDetailPage = () => {
 
      const fetchQuestion = async () => {
             setFullPageLoading(true)
-            const res = await getQuestionDetailById(questionId);
+            const res = await getQuestion(questionId);
             setFullPageLoading(false)
             if (!res) return;
 
@@ -50,12 +50,12 @@ const QuestionDetailPage = () => {
                 _id: op._id,   // 🔴 thêm ID
                 content: op.content,
                 isCorrect: op.isCorrect,
-                image: op.image
+                image: op.imageUrl
                     ? [{
                         uid: op._id,
-                        name: "image",
+                        name:  op.fileName,
                         status: "done",
-                        url: op.image
+                        url: op.imageUrl
                     }]
                     : []
             }));
@@ -74,12 +74,12 @@ const QuestionDetailPage = () => {
 
             /* question image */
 
-            const questionImage = question.image
+            const questionImage = question.imageUrl
                 ? [{
                     uid: "question-image",
                     name: "image",
                     status: "done",
-                    url: question.image
+                    url: question.imageUrl
                 }]
                 : [];
 
@@ -100,7 +100,7 @@ const QuestionDetailPage = () => {
         try {
             try {
                 setFullPageLoading(true)
-                const res = await updateQuestionWithOptions(questionId, values)
+                const res = await updateQuestion(questionId, values)
                 if (res.status === 'ok') {
                     message.success("Cập nhật thành công")
                     fetchQuestion();
@@ -189,13 +189,13 @@ const QuestionDetailPage = () => {
     const handleDelete = async () => {
         try {
             setFullPageLoading(true)
-            const res = await deleteQuestionById(questionId);
+            const res = await deleteQuestion(questionId);
             if (res.status) {
                 navigate(-1)
             }
             setFullPageLoading(false)
         } catch (error) {
-            console.log(error)
+            message.error(error.message)
             setFullPageLoading(false)
         }
 

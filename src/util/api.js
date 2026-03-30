@@ -63,7 +63,7 @@ const getLectureDetailApi = (value) => {
     return axios.get(URL_API);
 }
 const deleteLectureDetailApi = (value) => {
-    const URL_API = `/v1/api/lecture/` + value;
+    const URL_API = `/v1/api/lectures/` + value+'/questions';
     return axios.delete(URL_API);
 }
 

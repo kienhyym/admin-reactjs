@@ -115,7 +115,7 @@ const QuizDetail = () => {
           columns={columns}
           dataSource={questions}
           pagination={false}
-          rowKey={(record, index) => {
+          rowKey={(record) => {
             return record._id
           }}
         />
